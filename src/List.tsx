@@ -7,12 +7,16 @@ const db = firebase.firestore();
 interface ListItem {
   name: string;
   id: string;
-  category: string;
   checked: boolean;
+}
+interface Category {
+  name: string;
+  id: string;
+  items: ListItem[];
 }
 interface ListData {
   name: string;
-  items: ListItem[];
+  categories: Category[];
 }
 
 const List = ({ id }: { id: string }) => {
@@ -35,30 +39,44 @@ const List = ({ id }: { id: string }) => {
     <div className={classes.card}>
       <h3>{listData?.name}</h3>
       <ol style={{ listStyleType: 'none', padding: 0 }}>
-        {listData?.items.map((item) => (
-          <li key={item.id}>
-            {`${item.category}:`}
-            <label>
-              <input
-                type='checkbox'
-                id={item.id}
-                checked={item.checked}
-                onChange={(e) => {
-                  const newItems = listData.items.map((x) => {
-                    if (x.id !== item.id) return x;
-                    return {
-                      ...x,
-                      checked: e.target.checked,
-                    };
-                  });
-                  listRef.update({
-                    items: newItems,
-                  });
-                }}
-              />
+        {listData?.categories.map((category) => (
+          <li key={category.id}>
+            {`${category.name}:`}
+            {category.items.map((item) => {
+              return (
+                <label>
+                  <input
+                    type='checkbox'
+                    id={item.id}
+                    checked={item.checked}
+                    onChange={(e) => {
+                      const newCategories = listData.categories.map(
+                        (categoryToCheck) => {
+                          if (categoryToCheck.id !== category.id)
+                            return categoryToCheck;
+                          return {
+                            ...categoryToCheck,
+                            items: categoryToCheck.items.map((itemToCheck) => {
+                              if (itemToCheck.id !== item.id)
+                                return itemToCheck;
+                              return {
+                                ...itemToCheck,
+                                checked: e.target.checked,
+                              };
+                            }),
+                          };
+                        }
+                      );
+                      listRef.update({
+                        categories: newCategories,
+                      });
+                    }}
+                  />
 
-              <span>{item.name}</span>
-            </label>
+                  <span>{item.name}</span>
+                </label>
+              );
+            })}
           </li>
         ))}
       </ol>
