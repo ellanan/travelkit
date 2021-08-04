@@ -1,4 +1,6 @@
 import firebase from 'firebase/app';
+import produce from 'immer';
+
 import { useEffect, useMemo, useState } from 'react';
 import classes from './List.module.css';
 
@@ -44,27 +46,26 @@ const List = ({ id }: { id: string }) => {
             {`${category.name}:`}
             {category.items.map((item) => {
               return (
-                <label>
+                <label key={item.id}>
                   <input
                     type='checkbox'
                     id={item.id}
                     checked={item.checked}
                     onChange={(e) => {
-                      const newCategories = listData.categories.map(
-                        (categoryToCheck) => {
-                          if (categoryToCheck.id !== category.id)
-                            return categoryToCheck;
-                          return {
-                            ...categoryToCheck,
-                            items: categoryToCheck.items.map((itemToCheck) => {
-                              if (itemToCheck.id !== item.id)
-                                return itemToCheck;
-                              return {
-                                ...itemToCheck,
-                                checked: e.target.checked,
-                              };
-                            }),
-                          };
+                      const newCategories = produce(
+                        listData.categories,
+                        (draftCategories) => {
+                          const itemToUpdate = draftCategories
+                            .find(({ id }) => id === category.id)
+                            ?.items.find(({ id }) => id === item.id);
+
+                          if (!(itemToUpdate && 'checked' in itemToUpdate)) {
+                            throw new Error(
+                              `Could not find item ${item.id}. This should be impossible`
+                            );
+                          }
+
+                          itemToUpdate.checked = e.target.checked;
                         }
                       );
                       listRef.update({
