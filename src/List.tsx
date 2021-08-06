@@ -1,3 +1,5 @@
+import { Card } from './Card';
+
 import { useListData } from './useListData';
 
 const List = ({ id }: { id: string }) => {
@@ -14,7 +16,7 @@ const List = ({ id }: { id: string }) => {
       <div>
         <ol style={{ listStyleType: 'none', padding: 0 }}>
           {listData?.categories.map((category) => (
-            <li key={category.id} className='card'>
+            <Card as='li' key={category.id}>
               <h3>{`${category.name}:`}</h3>
 
               <button
@@ -57,7 +59,7 @@ const List = ({ id }: { id: string }) => {
                   </div>
                 );
               })}
-            </li>
+            </Card>
           ))}
         </ol>
       </div>
