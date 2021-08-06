@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-beautiful-dnd": "^13.1.1",
     "@types/styled-components": "^5.1.12",
     "firebase": "^8.7.1"
   }
