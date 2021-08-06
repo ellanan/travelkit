@@ -26,39 +26,41 @@ const List = ({ id }: { id: string }) => {
               >
                 +
               </button>
-              {category.items.map((item) => {
-                return (
-                  <div key={item.id}>
-                    <label>
+              <ol style={{ listStyleType: 'none', padding: 0 }}>
+                {category.items.map((item) => {
+                  return (
+                    <li key={item.id}>
+                      <label>
+                        <input
+                          type='checkbox'
+                          id={item.id}
+                          checked={item.checked}
+                          onChange={(e) => {
+                            setItemInCategoryChecked({
+                              categoryId: category.id,
+                              itemId: item.id,
+                              checked: e.target.checked,
+                            });
+                          }}
+                        />
+                      </label>
                       <input
-                        type='checkbox'
-                        id={item.id}
-                        checked={item.checked}
-                        onChange={(e) => {
-                          setItemInCategoryChecked({
-                            categoryId: category.id,
-                            itemId: item.id,
-                            checked: e.target.checked,
-                          });
+                        type='text'
+                        defaultValue={item.name}
+                        onBlur={(e) => {
+                          if (item.name !== e.target.value) {
+                            setItemInCategoryName({
+                              categoryId: category.id,
+                              itemId: item.id,
+                              name: e.target.value,
+                            });
+                          }
                         }}
                       />
-                    </label>
-                    <input
-                      type='text'
-                      defaultValue={item.name}
-                      onBlur={(e) => {
-                        if (item.name !== e.target.value) {
-                          setItemInCategoryName({
-                            categoryId: category.id,
-                            itemId: item.id,
-                            name: e.target.value,
-                          });
-                        }
-                      }}
-                    />
-                  </div>
-                );
-              })}
+                    </li>
+                  );
+                })}
+              </ol>
             </Card>
           ))}
         </ol>
