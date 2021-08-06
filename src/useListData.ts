@@ -26,6 +26,15 @@ export const useListData = ({ id }: { id: string }) => {
   const [listData, setListdata] = useState<ListData | null>(null);
   const listRef = useMemo(() => db.collection('lists').doc(id), [id]);
 
+  const setCategories = useCallback(
+    (newCategories: Category[]) => {
+      listRef.update({
+        categories: newCategories,
+      });
+    },
+    [listRef]
+  );
+
   const createNewItemInCategory = useCallback(
     ({ categoryId }: { categoryId: string }) => {
       if (!listData) return;
@@ -118,6 +127,28 @@ export const useListData = ({ id }: { id: string }) => {
     [listData, listRef]
   );
 
+  const setCategoryName = useCallback(
+    ({ categoryId, name }: { categoryId: string; name: string }) => {
+      if (!listData) return;
+
+      const newCategories = produce(listData.categories, (draftCategories) => {
+        const categoryToUpdate = draftCategories.find(
+          ({ id }) => id === categoryId
+        );
+
+        if (!categoryToUpdate) {
+          throw new Error(
+            `Could not find item ${categoryId}. This should be impossible`
+          );
+        }
+
+        categoryToUpdate.name = name;
+      });
+      setCategories(newCategories);
+    },
+    [listData, setCategories]
+  );
+
   const setCategoriesItems = useCallback(
     (categoriesItems: Array<{ categoryId: string; items: ListItem[] }>) => {
       if (!listData) return;
@@ -168,5 +199,6 @@ export const useListData = ({ id }: { id: string }) => {
     setItemInCategoryChecked,
     setItemInCategoryName,
     setCategoriesItems,
+    setCategoryName,
   };
 };
