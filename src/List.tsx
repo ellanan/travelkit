@@ -1,3 +1,5 @@
+import { Checkbox } from '@chakra-ui/react';
+
 import { Card } from './Card';
 
 import { useListData } from './useListData';
@@ -31,10 +33,8 @@ const List = ({ id }: { id: string }) => {
                   return (
                     <li key={item.id}>
                       <label>
-                        <input
-                          type='checkbox'
-                          id={item.id}
-                          checked={item.checked}
+                        <Checkbox
+                          isChecked={item.checked}
                           onChange={(e) => {
                             setItemInCategoryChecked({
                               categoryId: category.id,
