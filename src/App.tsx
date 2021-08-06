@@ -1,11 +1,12 @@
+import { ChakraProvider } from '@chakra-ui/react';
 import Lists from './Lists';
 
 function App() {
   return (
-    <div>
+    <ChakraProvider>
       <Lists />
       <Attribution />
-    </div>
+    </ChakraProvider>
   );
 }
 
