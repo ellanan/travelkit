@@ -37,49 +37,85 @@ const List = ({ id }: { id: string }) => {
   }, [listRef]);
 
   return (
-    <div className={classes.card}>
-      <h3>{listData?.name}</h3>
-      <ol style={{ listStyleType: 'none', padding: 0 }}>
-        {listData?.categories.map((category) => (
-          <li key={category.id}>
-            {`${category.name}:`}
-            {category.items.map((item) => {
-              return (
-                <label key={item.id}>
-                  <input
-                    type='checkbox'
-                    id={item.id}
-                    checked={item.checked}
-                    onChange={(e) => {
-                      const newCategories = produce(
-                        listData.categories,
-                        (draftCategories) => {
-                          const itemToUpdate = draftCategories
-                            .find(({ id }) => id === category.id)
-                            ?.items.find(({ id }) => id === item.id);
+    <div>
+      <h2>{listData?.name}</h2>
+      <div>
+        <ol style={{ listStyleType: 'none', padding: 0 }}>
+          {listData?.categories.map((category) => (
+            <li key={category.id} className='card'>
+              <h3>{`${category.name}:`}</h3>
 
-                          if (!(itemToUpdate && 'checked' in itemToUpdate)) {
-                            throw new Error(
-                              `Could not find item ${item.id}. This should be impossible`
-                            );
-                          }
-
-                          itemToUpdate.checked = e.target.checked;
-                        }
+              <button
+                onClick={() => {
+                  const newCategories = produce(
+                    listData.categories,
+                    (draftCategories) => {
+                      const categoryToUpdate = draftCategories.find(
+                        ({ id }) => id === category.id
                       );
-                      listRef.update({
-                        categories: newCategories,
-                      });
-                    }}
-                  />
 
-                  <span>{item.name}</span>
-                </label>
-              );
-            })}
-          </li>
-        ))}
-      </ol>
+                      if (!categoryToUpdate) {
+                        throw new Error(
+                          `Could not find item ${category.id}. This should be impossible`
+                        );
+                      }
+
+                      categoryToUpdate.items.push({
+                        id: Math.random().toString(36).substr(2, 9),
+                        name: '.......',
+                        checked: false,
+                      });
+                    }
+                  );
+
+                  listRef.update({
+                    categories: newCategories,
+                  });
+                }}
+              >
+                +
+              </button>
+              {category.items.map((item) => {
+                return (
+                  <label key={item.id}>
+                    <div>
+                      <input
+                        type='checkbox'
+                        id={item.id}
+                        checked={item.checked}
+                        onChange={(e) => {
+                          const newCategories = produce(
+                            listData.categories,
+                            (draftCategories) => {
+                              const itemToUpdate = draftCategories
+                                .find(({ id }) => id === category.id)
+                                ?.items.find(({ id }) => id === item.id);
+
+                              if (
+                                !(itemToUpdate && 'checked' in itemToUpdate)
+                              ) {
+                                throw new Error(
+                                  `Could not find item ${item.id}. This should be impossible`
+                                );
+                              }
+
+                              itemToUpdate.checked = e.target.checked;
+                            }
+                          );
+                          listRef.update({
+                            categories: newCategories,
+                          });
+                        }}
+                      />
+                      <span>{item.name}</span>
+                    </div>
+                  </label>
+                );
+              })}
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 };
