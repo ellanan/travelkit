@@ -118,6 +118,30 @@ export const useListData = ({ id }: { id: string }) => {
     [listData, listRef]
   );
 
+  const setCategoriesItems = useCallback(
+    (categoriesItems: Array<{ categoryId: string; items: ListItem[] }>) => {
+      if (!listData) return;
+
+      const newCategories = produce(listData.categories, (draftCategories) => {
+        categoriesItems.forEach(({ categoryId, items }) => {
+          const categoryToUpdate = draftCategories.find(
+            ({ id }) => id === categoryId
+          );
+          if (!categoryToUpdate) {
+            throw new Error(
+              `Could not find item ${categoryId}. This should be impossible`
+            );
+          }
+          categoryToUpdate.items = items;
+        });
+      });
+      listRef.update({
+        categories: newCategories,
+      });
+    },
+    [listData, listRef]
+  );
+
   useEffect(() => {
     listRef.onSnapshot({
       next: (newDocData) => {
@@ -136,5 +160,6 @@ export const useListData = ({ id }: { id: string }) => {
     createNewItemInCategory,
     setItemInCategoryChecked,
     setItemInCategoryName,
+    setCategoriesItems,
   };
 };
