@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const db = firebase.firestore();
 
-interface ListItem {
+export interface ListItem {
   name: string;
   id: string;
   checked: boolean;
