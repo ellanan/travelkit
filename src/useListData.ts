@@ -86,6 +86,38 @@ export const useListData = ({ id }: { id: string }) => {
     [listData, listRef]
   );
 
+  const setItemInCategoryName = useCallback(
+    ({
+      categoryId,
+      itemId,
+      name,
+    }: {
+      categoryId: string;
+      itemId: string;
+      name: string;
+    }) => {
+      if (!listData) return;
+
+      const newCategories = produce(listData.categories, (draftCategories) => {
+        const itemToUpdate = draftCategories
+          .find(({ id }) => id === categoryId)
+          ?.items.find(({ id }) => id === itemId);
+
+        if (!(itemToUpdate && 'checked' in itemToUpdate)) {
+          throw new Error(
+            `Could not find item ${itemId}. This should be impossible`
+          );
+        }
+
+        itemToUpdate.name = name;
+      });
+      listRef.update({
+        categories: newCategories,
+      });
+    },
+    [listData, listRef]
+  );
+
   useEffect(() => {
     listRef.onSnapshot({
       next: (newDocData) => {
@@ -103,5 +135,6 @@ export const useListData = ({ id }: { id: string }) => {
     setListdata,
     createNewItemInCategory,
     setItemInCategoryChecked,
+    setItemInCategoryName,
   };
 };

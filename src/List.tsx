@@ -1,8 +1,12 @@
 import { useListData } from './useListData';
 
 const List = ({ id }: { id: string }) => {
-  const { listData, createNewItemInCategory, setItemInCategoryChecked } =
-    useListData({ id });
+  const {
+    listData,
+    createNewItemInCategory,
+    setItemInCategoryChecked,
+    setItemInCategoryName,
+  } = useListData({ id });
 
   return (
     <div>
@@ -22,8 +26,8 @@ const List = ({ id }: { id: string }) => {
               </button>
               {category.items.map((item) => {
                 return (
-                  <label key={item.id}>
-                    <div>
+                  <div key={item.id}>
+                    <label>
                       <input
                         type='checkbox'
                         id={item.id}
@@ -36,9 +40,21 @@ const List = ({ id }: { id: string }) => {
                           });
                         }}
                       />
-                      <span>{item.name}</span>
-                    </div>
-                  </label>
+                    </label>
+                    <input
+                      type='text'
+                      defaultValue={item.name}
+                      onBlur={(e) => {
+                        if (item.name !== e.target.value) {
+                          setItemInCategoryName({
+                            categoryId: category.id,
+                            itemId: item.id,
+                            name: e.target.value,
+                          });
+                        }
+                      }}
+                    />
+                  </div>
                 );
               })}
             </li>
