@@ -21,6 +21,7 @@ const List = ({ id }: { id: string }) => {
     setItemInCategoryChecked,
     setItemInCategoryName,
     setCategoriesItems,
+    setCategoryName,
   } = useListData({ id });
 
   const getCategoryItemsByCategoryId = (categoryId: string) =>
@@ -90,7 +91,19 @@ const List = ({ id }: { id: string }) => {
           >
             {listData?.categories.map((category) => (
               <Card as='li' key={category.id}>
-                <h3>{`${category.name}:`}</h3>
+                <Input
+                  type='text'
+                  defaultValue={category.name}
+                  variant='unstyled'
+                  onBlur={(e) => {
+                    if (category.name !== e.target.value) {
+                      setCategoryName({
+                        categoryId: category.id,
+                        name: e.target.value,
+                      });
+                    }
+                  }}
+                ></Input>
 
                 <button
                   onClick={() =>
