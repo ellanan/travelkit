@@ -2,7 +2,6 @@ import firebase from 'firebase/app';
 import produce from 'immer';
 
 import { useEffect, useMemo, useState } from 'react';
-import classes from './List.module.css';
 
 const db = firebase.firestore();
 
