@@ -1,4 +1,4 @@
-import { Checkbox } from '@chakra-ui/react';
+import { Checkbox, Input, HStack } from '@chakra-ui/react';
 
 import { Card } from './Card';
 
@@ -31,22 +31,22 @@ const List = ({ id }: { id: string }) => {
               <ol style={{ listStyleType: 'none', padding: 0 }}>
                 {category.items.map((item) => {
                   return (
-                    <li key={item.id}>
-                      <label>
-                        <Checkbox
-                          isChecked={item.checked}
-                          onChange={(e) => {
-                            setItemInCategoryChecked({
-                              categoryId: category.id,
-                              itemId: item.id,
-                              checked: e.target.checked,
-                            });
-                          }}
-                        />
-                      </label>
-                      <input
+                    <HStack as='li' key={item.id}>
+                      <Checkbox
+                        isChecked={item.checked}
+                        onChange={(e) => {
+                          setItemInCategoryChecked({
+                            categoryId: category.id,
+                            itemId: item.id,
+                            checked: e.target.checked,
+                          });
+                        }}
+                      />
+
+                      <Input
                         type='text'
                         defaultValue={item.name}
+                        variant='unstyled'
                         onBlur={(e) => {
                           if (item.name !== e.target.value) {
                             setItemInCategoryName({
@@ -57,7 +57,7 @@ const List = ({ id }: { id: string }) => {
                           }
                         }}
                       />
-                    </li>
+                    </HStack>
                   );
                 })}
               </ol>
