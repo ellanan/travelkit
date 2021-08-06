@@ -135,11 +135,18 @@ export const useListData = ({ id }: { id: string }) => {
           categoryToUpdate.items = items;
         });
       });
+      setListdata(
+        (state) =>
+          state && {
+            ...state,
+            categories: newCategories,
+          }
+      );
       listRef.update({
         categories: newCategories,
       });
     },
-    [listData, listRef]
+    [listData, listRef, setListdata]
   );
 
   useEffect(() => {
