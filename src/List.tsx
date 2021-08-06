@@ -80,7 +80,14 @@ const List = ({ id }: { id: string }) => {
       <h2>{listData?.name}</h2>
       <div>
         <DragDropContext onDragEnd={onDragEnd}>
-          <ol style={{ listStyleType: 'none', padding: 0 }}>
+          <ol
+            style={{
+              listStyleType: 'none',
+              padding: 0,
+              display: 'flex',
+              flexWrap: 'wrap',
+            }}
+          >
             {listData?.categories.map((category) => (
               <Card as='li' key={category.id}>
                 <h3>{`${category.name}:`}</h3>
