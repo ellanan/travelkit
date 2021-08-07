@@ -35,6 +35,21 @@ export const useListData = ({ id }: { id: string }) => {
     [listRef]
   );
 
+  const createNewCategory = () => {
+    if (!listData) return;
+
+    listRef.update({
+      categories: [
+        ...listData.categories,
+        {
+          name: 'add new',
+          id: Math.random().toString(36).substr(2, 9),
+          items: [],
+        },
+      ],
+    });
+  };
+
   const createNewItemInCategory = useCallback(
     ({ categoryId }: { categoryId: string }) => {
       if (!listData) return;
@@ -195,6 +210,7 @@ export const useListData = ({ id }: { id: string }) => {
   return {
     listData,
     setListdata,
+    createNewCategory,
     createNewItemInCategory,
     setItemInCategoryChecked,
     setItemInCategoryName,
