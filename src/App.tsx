@@ -22,7 +22,7 @@ const TravelBackground = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.97;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 export default App;
