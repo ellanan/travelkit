@@ -8,8 +8,8 @@ import {
   DraggingStyle,
   NotDraggingStyle,
 } from 'react-beautiful-dnd';
-import { Checkbox, Input, HStack } from '@chakra-ui/react';
-import { DragHandleIcon } from '@chakra-ui/icons';
+import { Checkbox, Input, HStack, Button } from '@chakra-ui/react';
+import { DragHandleIcon, DeleteIcon } from '@chakra-ui/icons';
 
 import { Card } from './Card';
 
@@ -108,19 +108,28 @@ const List = ({ id }: { id: string }) => {
             {listData?.categories.map((category) => (
               <StyledListItem key={category.id}>
                 <Card style={{ width: '100%' }}>
-                  <Input
-                    type='text'
-                    defaultValue={category.name}
-                    variant='unstyled'
-                    onBlur={(e) => {
-                      if (category.name !== e.target.value) {
-                        setCategoryName({
-                          categoryId: category.id,
-                          name: e.target.value,
-                        });
-                      }
-                    }}
-                  />
+                  <HStack>
+                    <Input
+                      type='text'
+                      defaultValue={category.name}
+                      variant='unstyled'
+                      onBlur={(e) => {
+                        if (category.name !== e.target.value) {
+                          setCategoryName({
+                            categoryId: category.id,
+                            name: e.target.value,
+                          });
+                        }
+                      }}
+                    />
+                    <Button size='sm' variant='unstyled'>
+                      <DeleteIcon
+                        onClick={() =>
+                          removeCategory({ categoryId: category.id })
+                        }
+                      />
+                    </Button>
+                  </HStack>
 
                   <div>
                     <button
@@ -131,11 +140,7 @@ const List = ({ id }: { id: string }) => {
                       +
                     </button>
                   </div>
-                  <button
-                    onClick={() => removeCategory({ categoryId: category.id })}
-                  >
-                    ***DELETE ENTIRE CATEGORY***
-                  </button>
+
                   <Droppable droppableId={category.id}>
                     {(provided, snapshot) => (
                       <ol
