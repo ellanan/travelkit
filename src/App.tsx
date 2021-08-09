@@ -23,6 +23,8 @@ const TravelBackground = styled.div`
   background-repeat: no-repeat;
   opacity: 0.97;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
 `;
 
 export default App;

@@ -7,19 +7,16 @@ const Links = () => {
   return (
     <ul
       style={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
         padding: '1em',
         listStyleType: 'none',
-        display: 'grid  ',
-        width: '100%',
-        gridTemplateColumns: '1fr 1fr 1fr',
+        marginTop: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
       }}
     >
       <li
         style={{
-          gridColumnStart: 2,
           display: 'flex',
           justifyContent: 'center',
         }}
@@ -34,7 +31,7 @@ const Links = () => {
         </HStack>
       </li>
 
-      <li style={{ textAlign: 'right' }}>
+      <li>
         <a
           href='https://www.freepik.com/vectors/travel'
           style={{
