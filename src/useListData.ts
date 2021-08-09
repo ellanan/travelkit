@@ -26,6 +26,17 @@ export const useListData = ({ id }: { id: string }) => {
   const [listData, setListdata] = useState<ListData | null>(null);
   const listRef = useMemo(() => db.collection('lists').doc(id), [id]);
 
+  const setListDataName = useCallback(
+    (newName: string) => {
+      if (!listData) return;
+
+      listRef.update({
+        name: newName,
+      });
+    },
+    [listData, listRef]
+  );
+
   const setCategories = useCallback(
     (newCategories: Category[]) => {
       listRef.update({
@@ -35,7 +46,7 @@ export const useListData = ({ id }: { id: string }) => {
     [listRef]
   );
 
-  const createNewCategory = () => {
+  const createNewCategory = useCallback(() => {
     if (!listData) return;
 
     listRef.update({
@@ -48,7 +59,7 @@ export const useListData = ({ id }: { id: string }) => {
         },
       ],
     });
-  };
+  }, [listData, listRef]);
 
   const createNewItemInCategory = useCallback(
     ({ categoryId }: { categoryId: string }) => {
@@ -216,5 +227,6 @@ export const useListData = ({ id }: { id: string }) => {
     setItemInCategoryName,
     setCategoriesItems,
     setCategoryName,
+    setListDataName,
   };
 };

@@ -24,6 +24,7 @@ const List = ({ id }: { id: string }) => {
     setItemInCategoryName,
     setCategoriesItems,
     setCategoryName,
+    setListDataName,
   } = useListData({ id });
 
   const getCategoryItemsByCategoryId = (categoryId: string) =>
@@ -80,7 +81,19 @@ const List = ({ id }: { id: string }) => {
 
   return (
     <div>
-      <h2>{listData?.name}</h2>
+      <h2>
+        <Input
+          type='text'
+          variant='unstyled'
+          defaultValue={listData?.name}
+          onBlur={(e) => {
+            if (listData?.name !== e.target.value) {
+              setListDataName(e.target.value);
+            }
+          }}
+        />
+      </h2>
+
       <div>
         <DragDropContext onDragEnd={onDragEnd}>
           <ol
