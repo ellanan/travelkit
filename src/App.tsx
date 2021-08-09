@@ -1,35 +1,18 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import styled from 'styled-components/macro';
 import Lists from './Lists';
+import Links from './Links';
 
 function App() {
   return (
     <ChakraProvider>
       <TravelBackground>
         <Lists />
-        <Attribution />
+        <Links />
       </TravelBackground>
     </ChakraProvider>
   );
 }
-
-const Attribution = () => (
-  <a
-    href='https://www.freepik.com/vectors/travel'
-    style={{
-      color: '#333',
-      position: 'absolute',
-      bottom: '1em',
-      left: '1em',
-      fontSize: '10px',
-      textDecoration: 'none',
-      opacity: 0.4,
-      fontFamily: 'sans-serif',
-    }}
-  >
-    Travel vector created by rawpixel.com - www.freepik.com
-  </a>
-);
 
 const TravelBackground = styled.div`
   height: 100%;
@@ -39,6 +22,7 @@ const TravelBackground = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.97;
+  overflow: scroll;
 `;
 
 export default App;
