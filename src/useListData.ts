@@ -61,6 +61,19 @@ export const useListData = ({ id }: { id: string }) => {
     });
   }, [listData, listRef]);
 
+  const removeCategory = useCallback(
+    ({ categoryId }: { categoryId: string }) => {
+      if (!listData) return;
+      const updatedCategories = listData.categories.filter((category) => {
+        return categoryId !== category.id;
+      });
+      listRef.update({
+        categories: updatedCategories,
+      });
+    },
+    [listData, listRef]
+  );
+
   const createNewItemInCategory = useCallback(
     ({ categoryId }: { categoryId: string }) => {
       if (!listData) return;
@@ -228,5 +241,6 @@ export const useListData = ({ id }: { id: string }) => {
     setCategoriesItems,
     setCategoryName,
     setListDataName,
+    removeCategory,
   };
 };

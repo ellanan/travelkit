@@ -25,6 +25,7 @@ const List = ({ id }: { id: string }) => {
     setCategoriesItems,
     setCategoryName,
     setListDataName,
+    removeCategory,
   } = useListData({ id });
 
   const getCategoryItemsByCategoryId = (categoryId: string) =>
@@ -121,12 +122,19 @@ const List = ({ id }: { id: string }) => {
                     }}
                   />
 
+                  <div>
+                    <button
+                      onClick={() =>
+                        createNewItemInCategory({ categoryId: category.id })
+                      }
+                    >
+                      +
+                    </button>
+                  </div>
                   <button
-                    onClick={() =>
-                      createNewItemInCategory({ categoryId: category.id })
-                    }
+                    onClick={() => removeCategory({ categoryId: category.id })}
                   >
-                    +
+                    ***DELETE ENTIRE CATEGORY***
                   </button>
                   <Droppable droppableId={category.id}>
                     {(provided, snapshot) => (
