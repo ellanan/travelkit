@@ -122,7 +122,7 @@ const List = ({ id }: { id: string }) => {
                         }
                       }}
                     />
-                    <Button size='sm' variant='unstyled'>
+                    <Button size='sm' variant='unstyled' className='show-on-card-hover' >
                       <DeleteIcon
                         onClick={() =>
                           removeCategory({ categoryId: category.id })

@@ -6,4 +6,14 @@ export const Card = styled.div`
   border-radius: 10px;
   background-color: #d1c7f3f5;
   backdrop-filter: blur(1px);
+
+  @media (hover: hover) {
+    .show-on-card-hover {
+      opacity: 0;
+    }
+
+    &:hover .show-on-card-hover {
+      opacity: 1;
+    }
+  }
 `;
