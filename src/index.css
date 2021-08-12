@@ -8,3 +8,8 @@ body,
 #root {
   overflow: auto;
 }
+
+.my-masonry-grid {
+  display: flex;
+  width: auto;
+}

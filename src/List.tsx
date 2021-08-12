@@ -1,5 +1,4 @@
 import produce from 'immer';
-import styled from 'styled-components/macro';
 import {
   DragDropContext,
   Droppable,
@@ -10,6 +9,7 @@ import {
 } from 'react-beautiful-dnd';
 import { Checkbox, Input, HStack, Button } from '@chakra-ui/react';
 import { DragHandleIcon, DeleteIcon } from '@chakra-ui/icons';
+import Masonry from 'react-masonry-css';
 
 import { Card } from './Card';
 
@@ -80,6 +80,13 @@ const List = ({ id }: { id: string }) => {
     }
   };
 
+  const breakpointColumnsObj = {
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1,
+  };
+
   return (
     <div>
       <h2>
@@ -97,16 +104,13 @@ const List = ({ id }: { id: string }) => {
 
       <div>
         <DragDropContext onDragEnd={onDragEnd}>
-          <ol
-            style={{
-              listStyleType: 'none',
-              padding: 0,
-              display: 'flex',
-              flexWrap: 'wrap',
-            }}
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className='my-masonry-grid'
+            columnClassName='my-masonry-grid_column'
           >
             {listData?.categories.map((category) => (
-              <StyledListItem key={category.id}>
+              <div key={category.id} style={{ padding: '1em' }}>
                 <Card style={{ width: '100%' }}>
                   <HStack>
                     <Input
@@ -122,7 +126,11 @@ const List = ({ id }: { id: string }) => {
                         }
                       }}
                     />
-                    <Button size='sm' variant='unstyled' className='show-on-card-hover' >
+                    <Button
+                      size='sm'
+                      variant='unstyled'
+                      className='show-on-card-hover'
+                    >
                       <DeleteIcon
                         onClick={() =>
                           removeCategory({ categoryId: category.id })
@@ -202,18 +210,23 @@ const List = ({ id }: { id: string }) => {
                     )}
                   </Droppable>
                 </Card>
-              </StyledListItem>
+              </div>
             ))}
-            <StyledListItem style={{ width: '25%', padding: '1em' }}>
+            <div style={{ padding: '1em' }}>
               <Card
                 as='button'
                 onClick={createNewCategory}
-                style={{ width: '100%', minHeight: '80px', padding: '0', fontSize: '3em'}}
+                style={{
+                  width: '100%',
+                  minHeight: '80px',
+                  padding: '0',
+                  fontSize: '3em',
+                }}
               >
                 +
               </Card>
-            </StyledListItem>
-          </ol>
+            </div>
+          </Masonry>
         </DragDropContext>
       </div>
     </div>
@@ -235,11 +248,4 @@ const getItemStyle = (
   ...draggableStyle,
 });
 
-const StyledListItem = styled.li`
-  width: 100%;
-  padding: 1em;
-  @media (min-width: 600px) {
-    width: 25%;
-  }
-`;
 export default List;
