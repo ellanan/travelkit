@@ -208,7 +208,7 @@ const List = ({ id }: { id: string }) => {
               <Card
                 as='button'
                 onClick={createNewCategory}
-                style={{ width: '100%', minHeight: '80px' }}
+                style={{ width: '100%', minHeight: '80px', padding: '0', fontSize: '3em'}}
               >
                 +
               </Card>
