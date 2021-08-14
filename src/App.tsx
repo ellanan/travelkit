@@ -8,20 +8,18 @@ import MainHeader from './MainHeader';
 
 function App() {
   return (
-    <div>
-      <Switch>
-        <Route exact path='/'>
-          <Welcome />
-        </Route>
-        <Route path='/demo'>
-          <TravelBackground>
-            <MainHeader />
-            <Lists />
-            <Links />
-          </TravelBackground>
-        </Route>
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path='/'>
+        <Welcome />
+      </Route>
+      <Route path='/demo'>
+        <TravelBackground>
+          <MainHeader />
+          <Lists />
+          <Links />
+        </TravelBackground>
+      </Route>
+    </Switch>
   );
 }
 
