@@ -1,7 +1,10 @@
+import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSessionContext } from './useSessionContext';
 
 const MainHeader = () => {
+  const { isLoggedIn, logout } = useSessionContext();
   return (
     <div>
       <nav>
@@ -10,7 +13,11 @@ const MainHeader = () => {
             <NavLink to='/'>Welcome</NavLink>
           </li>
           <li>
-            <NavLink to='/login'>Login</NavLink>
+            {isLoggedIn ? (
+              <Button onClick={() => logout()}>Logout</Button>
+            ) : (
+              <NavLink to='/login'>Login</NavLink>
+            )}
           </li>
           <li>
             <NavLink to='/demo'>Demo</NavLink>
