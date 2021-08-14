@@ -10,6 +10,9 @@ const MainHeader = () => {
             <NavLink to='/'>Welcome</NavLink>
           </li>
           <li>
+            <NavLink to='/login'>Login</NavLink>
+          </li>
+          <li>
             <NavLink to='/demo'>Demo</NavLink>
           </li>
         </ul>
