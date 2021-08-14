@@ -22,6 +22,13 @@ interface ListData {
   categories: Category[];
 }
 
+const ensureListDataShape = (input: Record<string, any>): ListData => {
+  return {
+    name: input.name ?? 'New List',
+    categories: input.categories ?? [],
+  }
+}
+
 export const useListData = ({ id }: { id: string }) => {
   const [listData, setListdata] = useState<ListData | null>(null);
   const listRef = useMemo(() => db.collection('lists').doc(id), [id]);
@@ -223,7 +230,7 @@ export const useListData = ({ id }: { id: string }) => {
     listRef.onSnapshot({
       next: (newDocData) => {
         // @ts-ignore
-        setListdata(newDocData.data());
+        setListdata(ensureListDataShape(newDocData.data()));
       },
       error: (error) => {
         console.error(error);

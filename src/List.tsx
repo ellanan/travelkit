@@ -109,7 +109,7 @@ const List = ({ id }: { id: string }) => {
             className='my-masonry-grid'
             columnClassName='my-masonry-grid_column'
           >
-            {listData?.categories.map((category) => (
+            {listData?.categories?.map((category) => (
               <div key={category.id} style={{ padding: '1em' }}>
                 <Card style={{ width: '100%' }}>
                   <HStack>
