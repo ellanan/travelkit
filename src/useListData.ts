@@ -44,7 +44,7 @@ export const useListData = ({ id }: { id: string }) => {
     [listData, listRef]
   );
 
-  const setCategories = useCallback(
+  const setListCategories = useCallback(
     (newCategories: Category[]) => {
       listRef.update({
         categories: newCategories,
@@ -190,9 +190,9 @@ export const useListData = ({ id }: { id: string }) => {
 
         categoryToUpdate.name = name;
       });
-      setCategories(newCategories);
+      setListCategories(newCategories);
     },
-    [listData, setCategories]
+    [listData, setListCategories]
   );
 
   const setCategoriesItems = useCallback(
