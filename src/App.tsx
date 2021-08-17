@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom';
-import Links from './Links';
+import { ListPage } from './Links';
 import { TravelBackground } from './Backgrounds';
-import Welcome from './pages/Welcome';
+import Home from './pages/Home';
 import MainHeader from './MainHeader';
 import Login from './pages/Login';
 import List from './List';
@@ -12,7 +12,7 @@ function App() {
     <SessionContextProvider>
       <Switch>
         <Route exact path='/'>
-          <Welcome />
+          <Home />
         </Route>
         <Route exact path='/login'>
           <Login />
@@ -26,7 +26,7 @@ function App() {
               <TravelBackground>
                 <MainHeader />
                 <List id={match.params.listId} />
-                <Links />
+                <ListPage />
               </TravelBackground>
             );
           }}
