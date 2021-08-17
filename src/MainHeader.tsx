@@ -8,19 +8,30 @@ const MainHeader = () => {
   return (
     <div>
       <nav>
-        <ul>
-          <li>
-            <NavLink to='/'>Welcome</NavLink>
+        <ul
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            textDecoration: 'none',
+            listStyle: 'none',
+            backgroundColor: '#d1c7f3f5',
+            padding: '16px',
+          }}
+        >
+          <li style={{ padding: '10px' }}>
+            <NavLink to='/'>Home</NavLink>
           </li>
-          <li>
+          <li style={{ padding: '10px' }}>
+            <NavLink to='/demo'>Demo</NavLink>
+          </li>
+          <li style={{ marginLeft: '46em' }}>
             {isLoggedIn ? (
               <Button onClick={() => logout()}>Logout</Button>
             ) : (
-              <NavLink to='/login'>Login</NavLink>
+              <NavLink to='/login'>
+                <Button>Login</Button>
+              </NavLink>
             )}
-          </li>
-          <li>
-            <NavLink to='/demo'>Demo</NavLink>
           </li>
         </ul>
       </nav>
