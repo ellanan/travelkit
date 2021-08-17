@@ -3,12 +3,12 @@ import firebase from 'firebase/app';
 
 type SessionState = (
   | {
-      uid: string;
       isLoggedIn: true;
+      uid: string;
     }
   | {
-      uid: null | undefined;
       isLoggedIn: false;
+      uid: null | undefined;
     }
 ) & {
   displayName: string | null;

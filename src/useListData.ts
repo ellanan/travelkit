@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import produce from 'immer';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 
 const db = firebase.firestore();
 
@@ -18,236 +18,217 @@ interface Category {
 }
 
 interface ListData {
-  name: string;
-  categories: Category[];
+  name?: string;
+  categories?: Category[];
 }
+const randomId = () => Math.random().toString(36).substr(2, 9);
 
 const ensureListDataShape = (input: Record<string, any>): ListData => {
   return {
     name: input.name ?? 'New List',
     categories: input.categories ?? [],
-  }
-}
+  };
+};
 
-export const useListData = ({ id }: { id: string }) => {
-  const [listData, setListdata] = useState<ListData | null>(null);
-  const listRef = useMemo(() => db.collection('lists').doc(id), [id]);
-
-  const setListDataName = useCallback(
-    (newName: string) => {
-      if (!listData) return;
-
-      listRef.update({
-        name: newName,
-      });
-    },
-    [listData, listRef]
-  );
-
-  const setListCategories = useCallback(
-    (newCategories: Category[]) => {
-      listRef.update({
-        categories: newCategories,
-      });
-    },
-    [listRef]
-  );
-
-  const createNewCategory = useCallback(() => {
-    if (!listData) return;
-
-    listRef.update({
-      categories: [
-        ...listData.categories,
-        {
-          name: 'add new',
-          id: Math.random().toString(36).substr(2, 9),
-          items: [],
-        },
-      ],
-    });
-  }, [listData, listRef]);
-
-  const removeCategory = useCallback(
-    ({ categoryId }: { categoryId: string }) => {
-      if (!listData) return;
-      const updatedCategories = listData.categories.filter((category) => {
-        return categoryId !== category.id;
-      });
-      listRef.update({
-        categories: updatedCategories,
-      });
-    },
-    [listData, listRef]
-  );
-
-  const createNewItemInCategory = useCallback(
-    ({ categoryId }: { categoryId: string }) => {
-      if (!listData) return;
-      const newCategories = produce(listData.categories, (draftCategories) => {
-        const categoryToUpdate = draftCategories.find(
-          ({ id }) => id === categoryId
-        );
-
-        if (!categoryToUpdate) {
-          throw new Error(
-            `Could not find item ${categoryId}. This should be impossible`
-          );
-        }
-
-        categoryToUpdate.items.push({
-          id: Math.random().toString(36).substr(2, 9),
-          name: '.......',
-          checked: false,
-        });
-      });
-
-      listRef.update({
-        categories: newCategories,
-      });
-    },
-    [listData, listRef]
-  );
-
-  const setItemInCategoryChecked = useCallback(
-    ({
-      categoryId,
-      itemId,
-      checked,
-    }: {
+type ListDataAction =
+  | {
+      type: 'setListData';
+      listData: ListData;
+    }
+  | {
+      type: 'setListName';
+      newName: string;
+    }
+  | {
+      type: 'setListCategories';
+      categories: Category[];
+    }
+  | {
+      type: 'createNewCategory';
+      categoryName: string;
+    }
+  | {
+      type: 'removeCategory';
+      categoryId: string;
+    }
+  | {
+      type: 'addItemInCategory';
+      categoryId: string;
+      itemName: string;
+    }
+  | {
+      type: 'setItemInCategoryChecked';
       categoryId: string;
       itemId: string;
       checked: boolean;
-    }) => {
-      if (!listData) return;
-
-      const newCategories = produce(listData.categories, (draftCategories) => {
-        const itemToUpdate = draftCategories
-          .find(({ id }) => id === categoryId)
-          ?.items.find(({ id }) => id === itemId);
-
-        if (!(itemToUpdate && 'checked' in itemToUpdate)) {
-          throw new Error(
-            `Could not find item ${itemId}. This should be impossible`
-          );
-        }
-
-        itemToUpdate.checked = checked;
-      });
-      listRef.update({
-        categories: newCategories,
-      });
-    },
-    [listData, listRef]
-  );
-
-  const setItemInCategoryName = useCallback(
-    ({
-      categoryId,
-      itemId,
-      name,
-    }: {
+    }
+  | {
+      type: 'setItemInCategoryName';
       categoryId: string;
       itemId: string;
       name: string;
-    }) => {
-      if (!listData) return;
+    }
+  | {
+      type: 'setCategoryName';
+      categoryId: string;
+      name: string;
+    }
+  | {
+      type: 'setCategoriesItems';
+      categoriesItems: Array<{ categoryId: string; items: ListItem[] }>;
+    };
 
-      const newCategories = produce(listData.categories, (draftCategories) => {
-        const itemToUpdate = draftCategories
-          .find(({ id }) => id === categoryId)
-          ?.items.find(({ id }) => id === itemId);
-
-        if (!(itemToUpdate && 'checked' in itemToUpdate)) {
-          throw new Error(
-            `Could not find item ${itemId}. This should be impossible`
-          );
-        }
-
-        itemToUpdate.name = name;
-      });
-      listRef.update({
-        categories: newCategories,
-      });
-    },
-    [listData, listRef]
-  );
-
-  const setCategoryName = useCallback(
-    ({ categoryId, name }: { categoryId: string; name: string }) => {
-      if (!listData) return;
-
-      const newCategories = produce(listData.categories, (draftCategories) => {
-        const categoryToUpdate = draftCategories.find(
-          ({ id }) => id === categoryId
-        );
-
-        if (!categoryToUpdate) {
-          throw new Error(
-            `Could not find item ${categoryId}. This should be impossible`
-          );
-        }
-
-        categoryToUpdate.name = name;
-      });
-      setListCategories(newCategories);
-    },
-    [listData, setListCategories]
-  );
-
-  const setCategoriesItems = useCallback(
-    (categoriesItems: Array<{ categoryId: string; items: ListItem[] }>) => {
-      if (!listData) return;
-
-      const newCategories = produce(listData.categories, (draftCategories) => {
-        categoriesItems.forEach(({ categoryId, items }) => {
-          const categoryToUpdate = draftCategories.find(
-            ({ id }) => id === categoryId
-          );
-          if (!categoryToUpdate) {
-            throw new Error(
-              `Could not find item ${categoryId}. This should be impossible`
+const useListData = () => {
+  const [listData, dispatchListAction] = useReducer(
+    (
+      currentState: ListData | null,
+      action: ListDataAction
+    ): ListData | null => {
+      switch (action.type) {
+        case 'setListData':
+          return action.listData;
+        case 'setListName':
+          return {
+            ...currentState,
+            name: action.newName,
+          };
+        case 'setListCategories':
+          return {
+            ...currentState,
+            categories: action.categories,
+          };
+        case 'createNewCategory':
+          return produce(currentState, (draftState) => {
+            draftState?.categories?.push({
+              name: action.categoryName,
+              id: randomId(),
+              items: [],
+            });
+          });
+        case 'removeCategory':
+          return {
+            ...currentState,
+            categories: currentState?.categories?.filter(
+              (category) => action.categoryId !== category.id
+            ),
+          };
+        case 'addItemInCategory':
+          return produce(currentState, (draftState) => {
+            const categoryToUpdate = draftState?.categories?.find(
+              ({ id }) => id === action.categoryId
             );
-          }
-          categoryToUpdate.items = items;
-        });
-      });
-      setListdata(
-        (state) =>
-          state && {
-            ...state,
-            categories: newCategories,
-          }
-      );
-      listRef.update({
-        categories: newCategories,
-      });
+
+            if (!categoryToUpdate) {
+              throw new Error(`Could not find item ${action.categoryId}.`);
+            }
+
+            categoryToUpdate.items.push({
+              id: randomId(),
+              name: action.itemName,
+              checked: false,
+            });
+          });
+        case 'setItemInCategoryChecked':
+          return produce(currentState, (draftState) => {
+            const itemToUpdate = draftState?.categories
+              ?.find(({ id }) => id === action.categoryId)
+              ?.items.find(({ id }) => id === action.itemId);
+
+            if (!(itemToUpdate && 'checked' in itemToUpdate)) {
+              throw new Error(`Could not find item ${action.itemId}.`);
+            }
+            itemToUpdate.checked = action.checked;
+          });
+        case 'setItemInCategoryName':
+          return produce(currentState, (draftState) => {
+            const itemToUpdate = draftState?.categories
+              ?.find(({ id }) => id === action.categoryId)
+              ?.items.find(({ id }) => id === action.itemId);
+
+            if (!(itemToUpdate && 'checked' in itemToUpdate)) {
+              throw new Error(`Could not find item ${action.itemId}.`);
+            }
+            itemToUpdate.name = action.name;
+          });
+        case 'setCategoryName':
+          return produce(currentState, (draftState) => {
+            const categoryToUpdate = draftState?.categories?.find(
+              ({ id }) => id === action.categoryId
+            );
+
+            if (!categoryToUpdate) {
+              throw new Error(`Could not find item ${action.categoryId}.`);
+            }
+
+            categoryToUpdate.name = action.name;
+          });
+        case 'setCategoriesItems':
+          return produce(currentState, (draftState) => {
+            action.categoriesItems.forEach(({ categoryId, items }) => {
+              const categoryToUpdate = draftState?.categories?.find(
+                ({ id }) => id === categoryId
+              );
+              if (!categoryToUpdate) {
+                throw new Error(`Could not find item ${categoryId}.`);
+              }
+              categoryToUpdate.items = items;
+            });
+          });
+        default:
+          console.error(`Unhandled action:`, { action });
+          throw new Error(`Unhandled action`);
+      }
     },
-    [listData, listRef, setListdata]
+    null
   );
+
+  return {
+    listData,
+    dispatchListAction,
+  };
+};
+
+export const useListWithServerData = ({ listId }: { listId: string }) => {
+  const { listData, dispatchListAction } = useListData();
+  const [listDataFromServer, setListDataFromServer] = useState<ListData | null>(
+    null
+  );
+
+  const listRef = useMemo(() => db.collection('lists').doc(listId), [listId]);
 
   useEffect(() => {
-    listRef.onSnapshot({
+    console.log('server -> local effect triggered');
+    const unsubcribe = listRef.onSnapshot({
       next: (newDocData) => {
-        // @ts-ignore
-        setListdata(ensureListDataShape(newDocData.data()));
+        const serverListData = ensureListDataShape(newDocData.data() ?? {});
+        setListDataFromServer(serverListData);
+        dispatchListAction({
+          type: 'setListData',
+          listData: serverListData,
+        });
       },
       error: (error) => {
         console.error(error);
       },
     });
-  }, [listRef]);
+    return () => unsubcribe();
+  }, [listRef, dispatchListAction]);
+
+  useEffect(() => {
+    if (!listData) {
+      // haven't received data from server yet
+      return;
+    }
+
+    if (listData === listDataFromServer) {
+      // listData is exactly what was just received from the server
+      return;
+    }
+    listRef.update(listData);
+  }, [listData, listDataFromServer, listRef]);
 
   return {
     listData,
-    setListdata,
-    createNewCategory,
-    createNewItemInCategory,
-    setItemInCategoryChecked,
-    setItemInCategoryName,
-    setCategoriesItems,
-    setCategoryName,
-    setListDataName,
-    removeCategory,
+    dispatchListAction,
   };
 };

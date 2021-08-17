@@ -13,23 +13,15 @@ import Masonry from 'react-masonry-css';
 
 import { Card } from './Card';
 
-import { useListData } from './useListData';
+import { useListWithServerData } from './useListData';
 
 const List = ({ id }: { id: string }) => {
-  const {
-    listData,
-    createNewCategory,
-    createNewItemInCategory,
-    setItemInCategoryChecked,
-    setItemInCategoryName,
-    setCategoriesItems,
-    setCategoryName,
-    setListDataName,
-    removeCategory,
-  } = useListData({ id });
+  const { listData, dispatchListAction } = useListWithServerData({
+    listId: id,
+  });
 
   const getCategoryItemsByCategoryId = (categoryId: string) =>
-    listData?.categories.find((category) => category.id === categoryId)
+    listData?.categories?.find((category) => category.id === categoryId)
       ?.items ?? [];
 
   const onDragEnd = (result: DropResult) => {
@@ -49,12 +41,15 @@ const List = ({ id }: { id: string }) => {
         }
       );
 
-      setCategoriesItems([
-        {
-          categoryId: source.droppableId,
-          items,
-        },
-      ]);
+      dispatchListAction({
+        type: 'setCategoriesItems',
+        categoriesItems: [
+          {
+            categoryId: source.droppableId,
+            items,
+          },
+        ],
+      });
     } else {
       const [sourceItems, destinationItems] = produce(
         [
@@ -67,16 +62,19 @@ const List = ({ id }: { id: string }) => {
         }
       );
 
-      setCategoriesItems([
-        {
-          categoryId: source.droppableId,
-          items: sourceItems,
-        },
-        {
-          categoryId: destination.droppableId,
-          items: destinationItems,
-        },
-      ]);
+      dispatchListAction({
+        type: 'setCategoriesItems',
+        categoriesItems: [
+          {
+            categoryId: source.droppableId,
+            items: sourceItems,
+          },
+          {
+            categoryId: destination.droppableId,
+            items: destinationItems,
+          },
+        ],
+      });
     }
   };
 
@@ -96,7 +94,10 @@ const List = ({ id }: { id: string }) => {
           defaultValue={listData?.name}
           onBlur={(e) => {
             if (listData?.name !== e.target.value) {
-              setListDataName(e.target.value);
+              dispatchListAction({
+                type: 'setListName',
+                newName: e.target.value,
+              });
             }
           }}
         />
@@ -119,7 +120,8 @@ const List = ({ id }: { id: string }) => {
                       variant='unstyled'
                       onBlur={(e) => {
                         if (category.name !== e.target.value) {
-                          setCategoryName({
+                          dispatchListAction({
+                            type: 'setCategoryName',
                             categoryId: category.id,
                             name: e.target.value,
                           });
@@ -132,9 +134,12 @@ const List = ({ id }: { id: string }) => {
                       className='show-on-card-hover'
                     >
                       <DeleteIcon
-                        onClick={() =>
-                          removeCategory({ categoryId: category.id })
-                        }
+                        onClick={() => {
+                          dispatchListAction({
+                            type: 'removeCategory',
+                            categoryId: category.id,
+                          });
+                        }}
                       />
                     </Button>
                   </HStack>
@@ -142,7 +147,11 @@ const List = ({ id }: { id: string }) => {
                   <div>
                     <button
                       onClick={() =>
-                        createNewItemInCategory({ categoryId: category.id })
+                        dispatchListAction({
+                          type: 'addItemInCategory',
+                          categoryId: category.id,
+                          itemName: '.....',
+                        })
                       }
                     >
                       +
@@ -178,7 +187,8 @@ const List = ({ id }: { id: string }) => {
                                   <Checkbox
                                     isChecked={item.checked}
                                     onChange={(e) => {
-                                      setItemInCategoryChecked({
+                                      dispatchListAction({
+                                        type: 'setItemInCategoryChecked',
                                         categoryId: category.id,
                                         itemId: item.id,
                                         checked: e.target.checked,
@@ -192,7 +202,8 @@ const List = ({ id }: { id: string }) => {
                                     variant='unstyled'
                                     onBlur={(e) => {
                                       if (item.name !== e.target.value) {
-                                        setItemInCategoryName({
+                                        dispatchListAction({
+                                          type: 'setItemInCategoryName',
                                           categoryId: category.id,
                                           itemId: item.id,
                                           name: e.target.value,
@@ -215,7 +226,12 @@ const List = ({ id }: { id: string }) => {
             <div style={{ padding: '1em' }}>
               <Card
                 as='button'
-                onClick={createNewCategory}
+                onClick={() =>
+                  dispatchListAction({
+                    type: 'createNewCategory',
+                    categoryName: 'new category',
+                  })
+                }
                 style={{
                   width: '100%',
                   minHeight: '80px',
