@@ -14,7 +14,6 @@ const MainHeader = () => {
             flexDirection: 'row',
             textDecoration: 'none',
             listStyle: 'none',
-            backgroundColor: '#d1c7f3f5',
             padding: '16px',
           }}
         >
