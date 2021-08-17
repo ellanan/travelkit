@@ -51,7 +51,7 @@ export const ListPage = () => {
   );
 };
 
-export const HomePage = () => {
+export const HomePageLinks = () => {
   return (
     <ul
       style={{
