@@ -1,13 +1,13 @@
-import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Button } from '@chakra-ui/react';
 import { useSessionContext } from './useSessionContext';
 
 const MainHeader = () => {
   const { isLoggedIn, logout } = useSessionContext();
   return (
     <div>
-      <nav style={{ maxWidth: '84%', marginRight: 'auto', marginLeft: 'auto' }}>
+      <nav style={{ maxWidth: '88%', marginRight: 'auto', marginLeft: 'auto' }}>
         <ul
           style={{
             display: 'flex',
@@ -21,7 +21,11 @@ const MainHeader = () => {
             <NavLink to='/'>Home</NavLink>
           </li>
           <li style={{ padding: '10px' }}>
-            <NavLink to='/demo'>Demo</NavLink>
+            {isLoggedIn ? (
+              <NavLink to='/lists/:listId'>My TravelKit</NavLink>
+            ) : (
+              <NavLink to='/'>My TravelKit</NavLink>
+            )}
           </li>
           <li style={{ marginLeft: 'auto' }}>
             {isLoggedIn ? (
