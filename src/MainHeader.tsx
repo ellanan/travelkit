@@ -7,7 +7,7 @@ const MainHeader = () => {
   const { isLoggedIn, logout } = useSessionContext();
   return (
     <div>
-      <nav>
+      <nav style={{ maxWidth: '84%', marginRight: 'auto', marginLeft: 'auto' }}>
         <ul
           style={{
             display: 'flex',
@@ -23,7 +23,7 @@ const MainHeader = () => {
           <li style={{ padding: '10px' }}>
             <NavLink to='/demo'>Demo</NavLink>
           </li>
-          <li style={{ marginLeft: '46em' }}>
+          <li style={{ marginLeft: 'auto' }}>
             {isLoggedIn ? (
               <Button onClick={() => logout()}>Logout</Button>
             ) : (
