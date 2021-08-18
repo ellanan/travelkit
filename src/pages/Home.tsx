@@ -5,7 +5,7 @@ import { HomePageLinks } from '../Links';
 import { useListData } from '../useListData';
 import List from '../List';
 
-const Welcome = () => {
+const Home = () => {
   const { listData, dispatchListAction } = useListData();
 
   return (
@@ -24,12 +24,11 @@ const Welcome = () => {
           Have you packed the
           <Typewriter
             options={{
-              strings: ['passport', 'masks', 'phone charger'],
+              strings: ['passport?', 'hand sanitizer?', 'phone charger?'],
               autoStart: true,
               loop: true,
             }}
           />
-          ?
         </p>
         <img
           src={require('../images/travel-checklist.jpg').default}
@@ -43,4 +42,4 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+export default Home;
