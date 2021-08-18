@@ -3,7 +3,7 @@ import { GoMarkGithub } from 'react-icons/go';
 import { FaTwitter } from 'react-icons/fa';
 import { HStack } from '@chakra-ui/react';
 
-export const ListPage = () => {
+export const ListPageLinks = () => {
   return (
     <ul
       style={{
