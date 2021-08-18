@@ -78,7 +78,7 @@ type ListDataAction =
       categoriesItems: Array<{ categoryId: string; items: ListItem[] }>;
     };
 
-const useListData = () => {
+export const useListData = () => {
   const [listData, dispatchListAction] = useReducer(
     (
       currentState: ListData | null,
@@ -98,13 +98,14 @@ const useListData = () => {
             categories: action.categories,
           };
         case 'createNewCategory':
-          return produce(currentState, (draftState) => {
-            draftState?.categories?.push({
+          return {
+            ...currentState,
+            categories: (currentState?.categories ?? []).concat({
               name: action.categoryName,
               id: randomId(),
               items: [],
-            });
-          });
+            }),
+          };
         case 'removeCategory':
           return {
             ...currentState,
