@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
-import { ListPage } from './Links';
+import { ListPageLinks } from './Links';
 import { TravelBackground } from './Backgrounds';
 import Home from './pages/Home';
 import MainHeader from './MainHeader';
@@ -26,7 +26,7 @@ function App() {
               <TravelBackground>
                 <MainHeader />
                 <ListWithServerData id={match.params.listId} />
-                <ListPage />
+                <ListPageLinks />
               </TravelBackground>
             );
           }}
