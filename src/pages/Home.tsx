@@ -1,4 +1,5 @@
 import React from 'react';
+import Typewriter from 'typewriter-effect';
 import MainHeader from '../MainHeader';
 import { HomePageLinks } from '../Links';
 import { useListData } from '../useListData';
@@ -20,7 +21,15 @@ const Welcome = () => {
             padding: '20px',
           }}
         >
-          Have you packed the ....?
+          Have you packed the
+          <Typewriter
+            options={{
+              strings: ['passport', 'masks', 'phone charger'],
+              autoStart: true,
+              loop: true,
+            }}
+          />
+          ?
         </p>
         <img
           src={require('../images/travel-checklist.jpg').default}
