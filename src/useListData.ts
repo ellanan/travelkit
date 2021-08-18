@@ -15,6 +15,7 @@ interface Category {
   name: string;
   id: string;
   items: ListItem[];
+  color?: string | undefined;
 }
 
 interface ListData {
