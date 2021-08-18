@@ -1,8 +1,12 @@
 import React from 'react';
 import MainHeader from '../MainHeader';
 import { HomePageLinks } from '../Links';
+import { useListData } from '../useListData';
+import List from '../List';
 
 const Welcome = () => {
+  const { listData, dispatchListAction } = useListData();
+
   return (
     <>
       <MainHeader />
@@ -24,6 +28,7 @@ const Welcome = () => {
           style={{ width: '500px', height: '400px' }}
         />
       </div>
+      <List listData={listData} dispatchListAction={dispatchListAction} />
       <HomePageLinks />
     </>
   );
