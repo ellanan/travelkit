@@ -4,8 +4,8 @@ import { TravelBackground } from './Backgrounds';
 import Home from './pages/Home';
 import MainHeader from './MainHeader';
 import Login from './pages/Login';
-import List from './List';
 import { SessionContextProvider } from './useSessionContext';
+import { ListWithServerData } from './ListWithServerData';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
             return (
               <TravelBackground>
                 <MainHeader />
-                <List id={match.params.listId} />
+                <ListWithServerData id={match.params.listId} />
                 <ListPage />
               </TravelBackground>
             );
