@@ -13,13 +13,12 @@ import Masonry from 'react-masonry-css';
 
 import { Card } from './Card';
 
-import { useListWithServerData } from './useListData';
+import { useListData } from './useListData';
 
-const List = ({ id }: { id: string }) => {
-  const { listData, dispatchListAction } = useListWithServerData({
-    listId: id,
-  });
-
+const List = ({
+  listData,
+  dispatchListAction,
+}: ReturnType<typeof useListData>) => {
   const getCategoryItemsByCategoryId = (categoryId: string) =>
     listData?.categories?.find((category) => category.id === categoryId)
       ?.items ?? [];
