@@ -12,7 +12,7 @@ const Home = () => {
     <>
       <MainHeader />
       <div style={{ display: 'flex', flexDirection: 'row' }}>
-        <p
+        <span
           style={{
             fontSize: '80px',
             fontWeight: 'bold',
@@ -29,7 +29,7 @@ const Home = () => {
               loop: true,
             }}
           />
-        </p>
+        </span>
         <img
           src={require('../images/travel-checklist.jpg').default}
           alt='travel checklist'
