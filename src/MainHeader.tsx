@@ -4,7 +4,7 @@ import { Button } from '@chakra-ui/react';
 import { useSessionContext } from './useSessionContext';
 
 const MainHeader = () => {
-  const { isLoggedIn, logout } = useSessionContext();
+  const { isLoggedIn, logout, uid } = useSessionContext();
   return (
     <div>
       <nav style={{ maxWidth: '88%', marginRight: 'auto', marginLeft: 'auto' }}>
@@ -21,8 +21,8 @@ const MainHeader = () => {
             <NavLink to='/'>Home</NavLink>
           </li>
           <li style={{ padding: '10px' }}>
-            {isLoggedIn ? (
-              <NavLink to='/lists/:listId'>My TravelKit</NavLink>
+            {uid ? (
+              <NavLink to={`/lists/${uid}`}>My TravelKit</NavLink>
             ) : (
               <NavLink to='/'>My TravelKit</NavLink>
             )}
