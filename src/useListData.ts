@@ -226,7 +226,7 @@ export const useListWithServerData = ({ listId }: { listId: string }) => {
       // listData is exactly what was just received from the server
       return;
     }
-    listRef.update(listData);
+    listRef.set(listData, { merge: true });
   }, [listData, listDataFromServer, listRef]);
 
   return {
