@@ -25,7 +25,10 @@ function App() {
             return (
               <TravelBackground>
                 <MainHeader />
-                <ListWithServerData id={match.params.listId} />
+                <ListWithServerData
+                  key={match.params.listId}
+                  id={match.params.listId}
+                />
                 <ListPageLinks />
               </TravelBackground>
             );
