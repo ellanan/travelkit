@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Typewriter from 'typewriter-effect';
 import MainHeader from '../MainHeader';
 import { HomePageLinks } from '../Links';
@@ -9,7 +9,7 @@ const Home = () => {
   const { listData, dispatchListAction } = useListData();
 
   return (
-    <>
+    <Fragment>
       <MainHeader />
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <span
@@ -38,7 +38,7 @@ const Home = () => {
       </div>
       <List listData={listData} dispatchListAction={dispatchListAction} />
       <HomePageLinks />
-    </>
+    </Fragment>
   );
 };
 
