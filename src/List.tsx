@@ -9,6 +9,7 @@ import {
 } from 'react-beautiful-dnd';
 import { Checkbox, Input, HStack, Button } from '@chakra-ui/react';
 import { DragHandleIcon, DeleteIcon } from '@chakra-ui/icons';
+import { IoColorPalette } from 'react-icons/io5';
 import Masonry from 'react-masonry-css';
 
 import { Card } from './Card';
@@ -111,7 +112,9 @@ const List = ({
           >
             {listData?.categories?.map((category) => (
               <div key={category.id} style={{ padding: '1em' }}>
-                <Card style={{ width: '100%' }}>
+                <Card
+                  style={{ width: '100%', backgroundColor: category.color }}
+                >
                   <HStack>
                     <Input
                       type='text'
@@ -219,6 +222,13 @@ const List = ({
                       </ol>
                     )}
                   </Droppable>
+                  <button
+                    className='show-on-card-hover'
+                    aria-label='Change Color'
+                    onClick={() => {}}
+                  >
+                    <IoColorPalette />
+                  </button>
                 </Card>
               </div>
             ))}
