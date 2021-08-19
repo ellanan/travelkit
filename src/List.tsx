@@ -87,22 +87,6 @@ const List = ({
 
   return (
     <div>
-      <h2>
-        <Input
-          type='text'
-          variant='unstyled'
-          defaultValue={listData?.name}
-          onBlur={(e) => {
-            if (listData?.name !== e.target.value) {
-              dispatchListAction({
-                type: 'setListName',
-                newName: e.target.value,
-              });
-            }
-          }}
-        />
-      </h2>
-
       <div>
         <DragDropContext onDragEnd={onDragEnd}>
           <Masonry
