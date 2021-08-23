@@ -31,7 +31,7 @@ const Home = () => {
             margin: 20px 40px;
             padding: 20px;
             @media (max-width: 800px) {
-              font-size: 30px;
+              font-size: 32px;
               font-weight: bold;
               text-align: center;
               margin: 10px 20px;
