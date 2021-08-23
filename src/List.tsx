@@ -93,6 +93,7 @@ const List = ({
             breakpointCols={breakpointColumnsObj}
             className='my-masonry-grid'
             columnClassName='my-masonry-grid_column'
+            style={{ marginLeft: '20px', marginRight: '20px' }}
           >
             {listData?.categories?.map((category) => (
               <div key={category.id} style={{ padding: '1em' }}>
