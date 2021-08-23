@@ -14,10 +14,10 @@ const Home = () => {
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <span
           style={{
-            fontSize: '80px',
+            fontSize: '60px',
             fontWeight: 'bold',
             textAlign: 'left',
-            margin: '20px',
+            margin: '20px 50px',
             padding: '20px',
           }}
         >
