@@ -137,7 +137,7 @@ const List = ({
                         dispatchListAction({
                           type: 'addItemInCategory',
                           categoryId: category.id,
-                          itemName: '.....',
+                          itemName: '',
                         })
                       }
                     >
@@ -170,7 +170,7 @@ const List = ({
                                     provided.draggableProps.style
                                   )}
                                 >
-                                  <DragHandleIcon />
+                                  <DragHandleIcon style={{ opacity: '0.7' }} />
                                   <Checkbox
                                     isChecked={item.checked}
                                     onChange={(e) => {
