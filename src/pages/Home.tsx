@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import Typewriter from 'typewriter-effect';
 import MainHeader from '../MainHeader';
 
+// eslint-disable-next-line
 import styled from 'styled-components/macro';
 import type {} from 'styled-components/cssprop';
 
