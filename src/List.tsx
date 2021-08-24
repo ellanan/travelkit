@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import produce from 'immer';
 import {
   DragDropContext,
@@ -7,10 +9,13 @@ import {
   DraggingStyle,
   NotDraggingStyle,
 } from 'react-beautiful-dnd';
+
 import { Checkbox, Input, HStack, Button } from '@chakra-ui/react';
-import { DragHandleIcon, DeleteIcon } from '@chakra-ui/icons';
+import { DragHandleIcon, DeleteIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import { IoColorPalette } from 'react-icons/io5';
 import Masonry from 'react-masonry-css';
+import styled from 'styled-components/macro';
+import type {} from 'styled-components/cssprop';
 
 import { Card } from './Card';
 
@@ -20,6 +25,7 @@ const List = ({
   listData,
   dispatchListAction,
 }: ReturnType<typeof useListData>) => {
+  const [portalDiv, setPortalDiv] = useState<HTMLDivElement | null>(null);
   const getCategoryItemsByCategoryId = (categoryId: string) =>
     listData?.categories?.find((category) => category.id === categoryId)
       ?.items ?? [];
@@ -96,7 +102,7 @@ const List = ({
             style={{ marginLeft: '20px', marginRight: '20px' }}
           >
             {listData?.categories?.map((category) => (
-              <div key={category.id} style={{ padding: '1em' }}>
+              <div style={{ padding: '1em' }}>
                 <Card
                   style={{ width: '100%', backgroundColor: category.color }}
                 >
@@ -146,66 +152,131 @@ const List = ({
                   </div>
 
                   <Droppable droppableId={category.id}>
-                    {(provided, snapshot) => (
-                      <ol
-                        ref={provided.innerRef}
-                        style={{ listStyleType: 'none', padding: 0 }}
-                      >
-                        {category.items.map((item, index) => {
-                          return (
-                            <Draggable
-                              key={item.id}
-                              draggableId={item.id}
-                              index={index}
-                            >
-                              {(provided, snapshot) => (
-                                <HStack
-                                  as='li'
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  // @ts-ignore
-                                  style={getItemStyle(
-                                    snapshot.isDragging,
-                                    provided.draggableProps.style
-                                  )}
-                                >
-                                  <DragHandleIcon style={{ opacity: '0.7' }} />
-                                  <Checkbox
-                                    isChecked={item.checked}
-                                    onChange={(e) => {
-                                      dispatchListAction({
-                                        type: 'setItemInCategoryChecked',
-                                        categoryId: category.id,
-                                        itemId: item.id,
-                                        checked: e.target.checked,
-                                      });
-                                    }}
-                                  />
+                    {(droppableProvided, droppableSnapshot) => {
+                      return (
+                        <ol
+                          ref={droppableProvided.innerRef}
+                          style={{ listStyleType: 'none', padding: 0 }}
+                          {...droppableProvided.droppableProps}
+                        >
+                          {category.items.map((item, index) => {
+                            return (
+                              <Draggable
+                                key={item.id}
+                                draggableId={item.id}
+                                index={index}
+                              >
+                                {(draggableProvided, draggableSnapshot) => {
+                                  if (
+                                    portalDiv &&
+                                    draggableSnapshot.isDragging
+                                  ) {
+                                    return createPortal(
+                                      <div
+                                        css={`
+                                          display: flex;
+                                          align-items: center;
+                                          user-select: none;
+                                          background: #ffffff33;
+                                          & > *:not(:first-child) {
+                                            margin-left: 0.5rem;
+                                          }
+                                        `}
+                                        ref={draggableProvided.innerRef}
+                                        {...draggableProvided.draggableProps}
+                                        {...draggableProvided.dragHandleProps}
+                                        style={
+                                          draggableProvided.draggableProps.style
+                                        }
+                                      >
+                                        <DragHandleIcon />
+                                        <Checkbox
+                                          css={`
+                                            border-color: #8e8e8ec0;
+                                          `}
+                                          colorScheme='blue'
+                                          isChecked={item.checked}
+                                        />
+                                        <span>{item.name}</span>
+                                      </div>,
+                                      portalDiv
+                                    );
+                                  }
+                                  return (
+                                    <li
+                                      ref={draggableProvided.innerRef}
+                                      {...draggableProvided.draggableProps}
+                                      {...draggableProvided.dragHandleProps}
+                                      css={`
+                                        display: flex;
+                                        align-items: center;
+                                        & > *:not(:first-child) {
+                                          margin-left: 0.5rem;
+                                        }
 
-                                  <Input
-                                    type='text'
-                                    defaultValue={item.name}
-                                    variant='unstyled'
-                                    onBlur={(e) => {
-                                      if (item.name !== e.target.value) {
-                                        dispatchListAction({
-                                          type: 'setItemInCategoryName',
-                                          categoryId: category.id,
-                                          itemId: item.id,
-                                          name: e.target.value,
-                                        });
-                                      }
-                                    }}
-                                  />
-                                </HStack>
-                              )}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </ol>
-                    )}
+                                        .show-on-item-hover {
+                                          opacity: 0;
+                                        }
+                                        &:hover .show-on-item-hover {
+                                          opacity: 1;
+                                        }
+                                      `}
+                                    >
+                                      <DragHandleIcon
+                                        style={{ opacity: '0.7' }}
+                                      />
+                                      <Checkbox
+                                        css={`
+                                          border-color: #8e8e8ec0;
+                                        `}
+                                        colorScheme='blue'
+                                        isChecked={item.checked}
+                                        onChange={(e) => {
+                                          dispatchListAction({
+                                            type: 'setItemInCategoryChecked',
+                                            categoryId: category.id,
+                                            itemId: item.id,
+                                            checked: e.target.checked,
+                                          });
+                                        }}
+                                      />
+
+                                      <Input
+                                        type='text'
+                                        defaultValue={item.name}
+                                        variant='unstyled'
+                                        onBlur={(e) => {
+                                          if (item.name !== e.target.value) {
+                                            dispatchListAction({
+                                              type: 'setItemInCategoryName',
+                                              categoryId: category.id,
+                                              itemId: item.id,
+                                              name: e.target.value,
+                                            });
+                                          }
+                                        }}
+                                      />
+                                      <button
+                                        className='show-on-item-hover'
+                                        onClick={() => {}}
+                                      >
+                                        <SmallCloseIcon
+                                          style={{
+                                            fontSize: '20px',
+                                            opacity: '0.7',
+                                          }}
+                                        />
+                                      </button>
+                                    </li>
+                                  );
+                                }}
+                              </Draggable>
+                            );
+                          })}
+                          {droppableProvided.placeholder}
+                        </ol>
+                      );
+                    }}
                   </Droppable>
                   <button
                     className='show-on-card-hover'
@@ -239,23 +310,21 @@ const List = ({
           </Masonry>
         </DragDropContext>
       </div>
+      <div
+        ref={(element) => {
+          setPortalDiv(element);
+        }}
+        css={`
+          position: absolute;
+          pointer-events: none;
+          height: 100%;
+          width: 100%;
+          top: 0;
+          bottom: 0;
+        `}
+      />
     </div>
   );
 };
-
-// references https://codesandbox.io/s/ql08j35j3q?file=/index.js
-const getItemStyle = (
-  isDragging: boolean,
-  draggableStyle: DraggingStyle | NotDraggingStyle | undefined
-) => ({
-  // some basic styles to make the items look a bit nicer
-  userSelect: 'none',
-
-  // change background colour if dragging
-  background: isDragging ? '#ffffff33' : 'transparent',
-
-  // styles we need to apply on draggables
-  ...draggableStyle,
-});
 
 export default List;
