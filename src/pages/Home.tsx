@@ -9,9 +9,10 @@ import type {} from 'styled-components/cssprop';
 import { HomePageLinks } from '../Links';
 import { useListData } from '../useListData';
 import List from '../List';
+import { demoListData } from './demoListData';
 
 const Home = () => {
-  const { listData, dispatchListAction } = useListData();
+  const { listData, dispatchListAction } = useListData(demoListData);
 
   return (
     <Fragment>
@@ -19,6 +20,7 @@ const Home = () => {
       <div
         css={`
           display: flex;
+          position: relative;
           @media (max-width: 800px) {
             flex-direction: column;
           }
@@ -26,21 +28,30 @@ const Home = () => {
       >
         <span
           css={`
-            font-size: 50px;
+            font-size: clamp(32px, 6vw, 72px);
+            line-height: 1.5;
             font-weight: bold;
             text-align: left;
             margin: 20px 40px;
             padding: 20px;
+            position: absolute;
             @media (max-width: 800px) {
               font-size: 32px;
               font-weight: bold;
               text-align: center;
               margin: 10px 20px;
               padding: 10px;
+              position: static;
+              .hide-for-mobile {
+                display: none;
+              }
+            }
+            .Typewriter {
+              white-space: nowrap;
             }
           `}
         >
-          Have you packed the
+          Have you <br className='hide-for-mobile' /> packed the
           <Typewriter
             options={{
               strings: ['passport?', 'hand sanitizer?', 'phone charger?'],
@@ -52,9 +63,13 @@ const Home = () => {
         <img
           src={require('../images/travel-checklist.jpg').default}
           alt='travel checklist'
+          width='6416'
+          height='5000'
           css={`
-            width: 500px;
-            height: 400px;
+            width: 50%;
+            height: auto;
+            margin-left: auto;
+            object-fit: contain;
             @media (max-width: 800px) {
               width: 350px;
               height: 300px;
