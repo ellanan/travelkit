@@ -14,6 +14,7 @@ import { Checkbox, Input, HStack, Button } from '@chakra-ui/react';
 import { DragHandleIcon, DeleteIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import { IoColorPalette } from 'react-icons/io5';
 import Masonry from 'react-masonry-css';
+// eslint-disable-next-line
 import styled from 'styled-components/macro';
 import type {} from 'styled-components/cssprop';
 
