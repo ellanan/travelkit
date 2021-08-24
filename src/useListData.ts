@@ -18,7 +18,7 @@ interface Category {
   color?: string | undefined;
 }
 
-interface ListData {
+export interface ListData {
   name?: string;
   categories?: Category[];
 }
@@ -79,7 +79,7 @@ type ListDataAction =
       categoriesItems: Array<{ categoryId: string; items: ListItem[] }>;
     };
 
-export const useListData = () => {
+export const useListData = (initialListData: ListData | null = null) => {
   const [listData, dispatchListAction] = useReducer(
     (
       currentState: ListData | null,
@@ -181,7 +181,7 @@ export const useListData = () => {
           throw new Error(`Unhandled action`);
       }
     },
-    null
+    initialListData
   );
 
   return {
