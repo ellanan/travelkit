@@ -6,8 +6,6 @@ import {
   Droppable,
   Draggable,
   DropResult,
-  DraggingStyle,
-  NotDraggingStyle,
 } from 'react-beautiful-dnd';
 
 import { Checkbox, Input, HStack, Button } from '@chakra-ui/react';
