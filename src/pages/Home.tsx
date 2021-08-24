@@ -80,6 +80,23 @@ const Home = () => {
         />
       </div>
       <List listData={listData} dispatchListAction={dispatchListAction} />
+      <img
+        src={require('../images/travel-people.jpg').default}
+        alt='travel people'
+        width='6416'
+        height='5000'
+        css={`
+          height: auto;
+          margin-left: auto;
+          object-fit: contain;
+          @media (max-width: 800px) {
+            width: auto;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+          } ;
+        `}
+      />
       <HomePageLinks />
     </Fragment>
   );
