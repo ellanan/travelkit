@@ -1,15 +1,16 @@
 import React, { Fragment } from 'react';
 import Typewriter from 'typewriter-effect';
+import { ArrowRightIcon } from '@chakra-ui/icons';
+
 import MainHeader from '../MainHeader';
-
-// eslint-disable-next-line
-import styled from 'styled-components/macro';
-import type {} from 'styled-components/cssprop';
-
 import { HomePageLinks } from '../Links';
 import { useListData } from '../useListData';
 import List from '../List';
 import { demoListData } from './demoListData';
+
+// eslint-disable-next-line
+import styled from 'styled-components/macro';
+import type {} from 'styled-components/cssprop';
 
 const Home = () => {
   const { listData, dispatchListAction } = useListData(demoListData);
@@ -78,6 +79,30 @@ const Home = () => {
             } ;
           `}
         />
+      </div>
+      <div
+        css={`
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          margin-left: auto;
+          margin: 20px 70px;
+          padding: 20px;
+          font-size: 25px;
+          font-weight: bold;
+          text-align: center;
+          @media (max-width: 800px) {
+            margin: 10px 20px;
+            padding: 10px;
+            font-size: 12px;
+          }
+        `}
+      >
+        Sign up/Login <ArrowRightIcon boxSize='1rem' />
+        Build your kit <ArrowRightIcon boxSize='1rem' />
+        Pack everything <ArrowRightIcon boxSize='1rem' />
+        Ready to travel
       </div>
       <List listData={listData} dispatchListAction={dispatchListAction} />
       <img
