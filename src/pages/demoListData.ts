@@ -35,7 +35,12 @@ export const demoListData: ListData = {
         {
           id: 'item-a06',
           checked: false,
-          name: 'cash and credit cards',
+          name: 'local currency',
+        },
+        {
+          id: 'item-a07',
+          checked: false,
+          name: 'credit cards',
         },
       ],
       color: '#53DAC2',
