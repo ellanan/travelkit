@@ -101,7 +101,7 @@ const List = ({
             style={{ marginLeft: '20px', marginRight: '20px' }}
           >
             {listData?.categories?.map((category) => (
-              <div style={{ padding: '1em' }}>
+              <div key={category.id} style={{ padding: '1em' }}>
                 <Card
                   style={{ width: '100%', backgroundColor: category.color }}
                 >
