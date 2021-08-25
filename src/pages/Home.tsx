@@ -89,7 +89,7 @@ const Home = () => {
           margin-left: auto;
           margin: 20px 70px;
           padding: 20px;
-          font-size: 25px;
+          font-size: 1.5em;
           font-weight: bold;
           text-align: center;
           @media (max-width: 800px) {
@@ -99,9 +99,9 @@ const Home = () => {
           }
         `}
       >
-        Sign up/Login <ArrowRightIcon boxSize='1rem' />
-        Build your kit <ArrowRightIcon boxSize='1rem' />
-        Pack everything <ArrowRightIcon boxSize='1rem' />
+        Sign up/Login <ArrowRightIcon boxSize='0.5rem' />
+        Build your kit <ArrowRightIcon boxSize='0.5rem' />
+        Pack everything <ArrowRightIcon boxSize='0.5rem' />
         Ready to travel
       </div>
       <List listData={listData} dispatchListAction={dispatchListAction} />
