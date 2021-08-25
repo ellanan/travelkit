@@ -110,6 +110,7 @@ const List = ({
                       type='text'
                       defaultValue={category.name}
                       variant='unstyled'
+                      style={{ fontWeight: 'bold', fontSize: '1em' }}
                       onBlur={(e) => {
                         if (category.name !== e.target.value) {
                           dispatchListAction({
