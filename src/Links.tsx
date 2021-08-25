@@ -98,3 +98,34 @@ export const HomePageLinks = () => {
     </ul>
   );
 };
+
+export const LoginPageLinks = () => {
+  return (
+    <ul
+      style={{
+        padding: '1em',
+        listStyleType: 'none',
+        marginTop: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <li
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <HStack gridGap={4}>
+          <a href='https://github.com' target='_blank' rel='noreferrer'>
+            <GoMarkGithub size={18} />
+          </a>
+          <a href='https://twitter.com/hpme' target='_blank' rel='noreferrer'>
+            <FaTwitter size={18} color='#1DA1F2' />
+          </a>
+        </HStack>
+      </li>
+    </ul>
+  );
+};

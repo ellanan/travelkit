@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import MainHeader from '../MainHeader';
 import { useSessionContext } from '../useSessionContext';
 import { Redirect } from 'react-router-dom';
+import { LoginPageLinks } from '../Links';
 
 const firebaseLoginUIConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -26,8 +27,18 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        position: 'relative',
+        flexDirection: 'column',
+        height: '100vh',
+      }}
+    >
       <MainHeader />
+      <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '1.5em' }}>
+        TravelKit
+      </p>
       <StyledFirebaseAuth
         uiConfig={firebaseLoginUIConfig}
         uiCallback={(...args) => {
@@ -35,6 +46,7 @@ const Login = () => {
         }}
         firebaseAuth={firebase.auth()}
       />
+      <LoginPageLinks />
     </div>
   );
 };
