@@ -1,9 +1,11 @@
 import { Route, Switch } from 'react-router-dom';
+
+import MainHeader from './MainHeader';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Demo from './pages/Demo';
 import { ListPageLinks } from './Links';
 import { TravelBackground } from './Backgrounds';
-import Home from './pages/Home';
-import MainHeader from './MainHeader';
-import Login from './pages/Login';
 import { SessionContextProvider } from './useSessionContext';
 import { ListWithServerData } from './ListWithServerData';
 
@@ -16,6 +18,9 @@ function App() {
         </Route>
         <Route exact path='/login'>
           <Login />
+        </Route>
+        <Route exact path='/lists/demo'>
+          <Demo />
         </Route>
 
         <Route
