@@ -158,6 +158,7 @@ export const useListData = (initialListData: ListData | null = null) => {
             if (!(itemToUpdate && 'checked' in itemToUpdate)) {
               throw new Error(`Could not find item ${action.itemId}.`);
             }
+
             itemToUpdate.checked = action.checked;
           });
         case 'setItemInCategoryName':
@@ -169,6 +170,7 @@ export const useListData = (initialListData: ListData | null = null) => {
             if (!(itemToUpdate && 'checked' in itemToUpdate)) {
               throw new Error(`Could not find item ${action.itemId}.`);
             }
+
             itemToUpdate.name = action.name;
           });
         case 'setCategoryName':
@@ -189,6 +191,7 @@ export const useListData = (initialListData: ListData | null = null) => {
               const categoryToUpdate = draftState?.categories?.find(
                 ({ id }) => id === categoryId
               );
+
               if (!categoryToUpdate) {
                 throw new Error(`Could not find item ${categoryId}.`);
               }
