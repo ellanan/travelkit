@@ -15,30 +15,15 @@ export const demoListData: ListData = {
         {
           id: 'item-a02',
           checked: false,
-          name: 'copies of passport',
+          name: 'travel insurance',
         },
         {
           id: 'item-a03',
           checked: false,
-          name: 'drivers license',
-        },
-        {
-          id: 'item-a04',
-          checked: false,
-          name: 'travel insurance',
-        },
-        {
-          id: 'item-a05',
-          checked: false,
-          name: 'vaccination card',
-        },
-        {
-          id: 'item-a06',
-          checked: false,
           name: 'local currency',
         },
         {
-          id: 'item-a07',
+          id: 'item-a04',
           checked: false,
           name: 'credit cards',
         },
@@ -58,16 +43,6 @@ export const demoListData: ListData = {
           id: 'item-b02',
           checked: false,
           name: 'hand sanitizer',
-        },
-        {
-          id: 'item-b03',
-          checked: false,
-          name: 'antibacterial wipes',
-        },
-        {
-          id: 'item-b04',
-          checked: false,
-          name: 'latex gloves',
         },
       ],
       color: '#96DAC8',
@@ -89,27 +64,7 @@ export const demoListData: ListData = {
         {
           id: 'item-c03',
           checked: false,
-          name: 'camera & charger',
-        },
-        {
-          id: 'item-c04',
-          checked: false,
-          name: 'e-reader',
-        },
-        {
-          id: 'item-c05',
-          checked: false,
           name: 'headphones',
-        },
-        {
-          id: 'item-c06',
-          checked: false,
-          name: 'travel adaptor',
-        },
-        {
-          id: 'item-c07',
-          checked: false,
-          name: 'portable power bank',
         },
       ],
       color: '#FFEEAD',
@@ -128,21 +83,6 @@ export const demoListData: ListData = {
           checked: false,
           name: 'pain relief',
         },
-        {
-          id: 'item-d03',
-          checked: false,
-          name: 'allergy pills',
-        },
-        {
-          id: 'item-d04',
-          checked: false,
-          name: 'bandaid',
-        },
-        {
-          id: 'item-d05',
-          checked: false,
-          name: 'eyedrop',
-        },
       ],
       color: '#D6EFF7',
     },
@@ -158,47 +98,17 @@ export const demoListData: ListData = {
         {
           id: 'item-e02',
           checked: false,
-          name: 'jeans',
+          name: 'shorts',
         },
         {
           id: 'item-e03',
           checked: false,
-          name: 'shorts',
+          name: 'pajamas',
         },
         {
           id: 'item-e04',
           checked: false,
-          name: 'pajamas',
-        },
-        {
-          id: 'item-e05',
-          checked: false,
-          name: 'swimsuits',
-        },
-        {
-          id: 'item-e06',
-          checked: false,
           name: 'underwear',
-        },
-        {
-          id: 'item-e07',
-          checked: false,
-          name: 'socks',
-        },
-        {
-          id: 'item-e08',
-          checked: false,
-          name: 'flip flops',
-        },
-        {
-          id: 'item-e09',
-          checked: false,
-          name: 'sandals',
-        },
-        {
-          id: 'item-e10',
-          checked: false,
-          name: 'hiking boots',
         },
       ],
       color: '#D6EFF7',
@@ -215,62 +125,12 @@ export const demoListData: ListData = {
         {
           id: 'item-f02',
           checked: false,
-          name: 'conditioner',
+          name: 'body wash',
         },
         {
           id: 'item-f03',
           checked: false,
-          name: 'body wash',
-        },
-        {
-          id: 'item-f04',
-          checked: false,
-          name: 'face wash',
-        },
-        {
-          id: 'item-f05',
-          checked: false,
-          name: 'face lotion',
-        },
-        {
-          id: 'item-f06',
-          checked: false,
-          name: 'toothbrush',
-        },
-        {
-          id: 'item-f07',
-          checked: false,
-          name: 'toothpaste',
-        },
-        {
-          id: 'item-f08',
-          checked: false,
-          name: 'floss',
-        },
-        {
-          id: 'item-f09',
-          checked: false,
-          name: 'retainer',
-        },
-        {
-          id: 'item-f10',
-          checked: false,
-          name: 'hair dryer',
-        },
-        {
-          id: 'item-f11',
-          checked: false,
-          name: 'sunscreen',
-        },
-        {
-          id: 'item-f12',
-          checked: false,
-          name: 'contacts',
-        },
-        {
-          id: 'item-f13',
-          checked: false,
-          name: 'glasses',
+          name: 'toothbrush/toothpaste',
         },
       ],
       color: '#D6EFF7',
