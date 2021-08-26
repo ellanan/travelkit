@@ -115,7 +115,11 @@ const List = ({
                       type='text'
                       defaultValue={category.name}
                       variant='unstyled'
-                      style={{ fontWeight: 'bold', fontSize: '1em' }}
+                      css={`
+                        font-weight: bold;
+                        font-size: 1em;
+                        margin-left: 0.5rem;
+                      `}
                       onBlur={(e) => {
                         if (category.name !== e.target.value) {
                           dispatchListAction({
@@ -202,7 +206,7 @@ const List = ({
                                         display: flex;
                                         align-items: center;
                                         & > *:not(:first-child) {
-                                          margin-left: 0.5rem;
+                                          margin-left: 0.8rem;
                                         }
 
                                         .show-on-item-hover {
@@ -214,7 +218,11 @@ const List = ({
                                       `}
                                     >
                                       <DragHandleIcon
-                                        style={{ opacity: '0.7' }}
+                                        className='show-on-item-hover'
+                                        css={`
+                                          margin-left: -8px;
+                                          margin-right: -6px;
+                                        `}
                                       />
                                       <Checkbox
                                         css={`
@@ -281,6 +289,7 @@ const List = ({
                       display: flex;
                       justify-content: flex-start;
                       align-items: center;
+                      margin-left: 15px;
                     `}
                   >
                     <SmallAddIcon
@@ -288,7 +297,7 @@ const List = ({
                       w={5}
                       h={5}
                       css={`
-                        margin-right: 30px;
+                        margin-right: 10px;
                         margin-left: -2px;
                       `}
                     />
