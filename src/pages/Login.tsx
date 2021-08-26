@@ -41,9 +41,7 @@ const Login = () => {
       </p>
       <StyledFirebaseAuth
         uiConfig={firebaseLoginUIConfig}
-        uiCallback={(...args) => {
-          console.log({ args });
-        }}
+        uiCallback={(...args) => {}}
         firebaseAuth={firebase.auth()}
       />
       <LoginPageLinks />
