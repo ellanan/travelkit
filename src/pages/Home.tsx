@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import Typewriter from 'typewriter-effect';
-import { ArrowRightIcon } from '@chakra-ui/icons';
 
 import MainHeader from '../MainHeader';
 import { HomePageLinks } from '../Links';
@@ -82,27 +81,19 @@ const Home = () => {
       </div>
       <div
         css={`
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
           margin-left: auto;
           margin: 20px 70px;
-          padding: 20px;
-          font-size: 1.5em;
+          font-size: 2em;
           font-weight: bold;
           text-align: center;
           @media (max-width: 800px) {
             margin: 10px 20px;
             padding: 10px;
-            font-size: 12px;
+            font-size: 1.5em;
           }
         `}
       >
-        Sign up/Login <ArrowRightIcon boxSize='0.5rem' />
-        Build your kit <ArrowRightIcon boxSize='0.5rem' />
-        Pack everything <ArrowRightIcon boxSize='0.5rem' />
-        Ready to travel
+        Your stress free vacation starts with TravelKit
       </div>
       <List listData={listData} dispatchListAction={dispatchListAction} />
       <img
