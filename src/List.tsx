@@ -116,9 +116,10 @@ const List = ({
                       defaultValue={category.name}
                       variant='unstyled'
                       css={`
-                        font-weight: bold;
-                        font-size: 1em;
+                        font-size: 0.8em;
+                        font-weight: 500;
                         margin-left: 0.5rem;
+                        text-transform: capitalize;
                       `}
                       onBlur={(e) => {
                         if (category.name !== e.target.value) {
