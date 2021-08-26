@@ -195,6 +195,7 @@ export const useListData = (initialListData: ListData | null = null) => {
               if (!categoryToUpdate) {
                 throw new Error(`Could not find item ${categoryId}.`);
               }
+
               categoryToUpdate.items = items;
             });
           });
@@ -243,12 +244,10 @@ export const useListWithServerData = ({ listId }: { listId: string }) => {
 
   useEffect(() => {
     if (!listData) {
-      // haven't received data from server yet
       return;
     }
 
     if (listData === listDataFromServer) {
-      // listData is exactly what was just received from the server
       return;
     }
     listRef.set(listData, { merge: true });
