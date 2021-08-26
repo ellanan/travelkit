@@ -9,7 +9,12 @@ import {
 } from 'react-beautiful-dnd';
 
 import { Checkbox, Input, HStack, Button } from '@chakra-ui/react';
-import { DragHandleIcon, DeleteIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import {
+  DragHandleIcon,
+  DeleteIcon,
+  SmallCloseIcon,
+  SmallAddIcon,
+} from '@chakra-ui/icons';
 import { IoColorPalette } from 'react-icons/io5';
 import Masonry from 'react-masonry-css';
 // eslint-disable-next-line
@@ -137,20 +142,6 @@ const List = ({
                     </Button>
                   </HStack>
 
-                  <div>
-                    <button
-                      onClick={() =>
-                        dispatchListAction({
-                          type: 'addItemInCategory',
-                          categoryId: category.id,
-                          itemName: '',
-                        })
-                      }
-                    >
-                      +
-                    </button>
-                  </div>
-
                   <Droppable droppableId={category.id}>
                     {(droppableProvided, droppableSnapshot) => {
                       return (
@@ -258,11 +249,13 @@ const List = ({
                                       />
                                       <button
                                         className='show-on-item-hover'
-                                        onClick={() => {dispatchListAction({
-                                          type: 'removeItemInCategory',
-                                          categoryId: category.id,
-                                          itemId: item.id,
-                                        })}}
+                                        onClick={() => {
+                                          dispatchListAction({
+                                            type: 'removeItemInCategory',
+                                            categoryId: category.id,
+                                            itemId: item.id,
+                                          });
+                                        }}
                                       >
                                         <SmallCloseIcon
                                           style={{
@@ -282,6 +275,48 @@ const List = ({
                       );
                     }}
                   </Droppable>
+
+                  <div
+                    css={`
+                      display: flex;
+                      justify-content: flex-start;
+                      align-items: center;
+                    `}
+                  >
+                    <SmallAddIcon
+                      color='grey'
+                      w={5}
+                      h={5}
+                      css={`
+                        margin-right: 30px;
+                        margin-left: -2px;
+                      `}
+                    />
+                    <Input
+                      type='text'
+                      variant='unstyled'
+                      placeholder='new item'
+                      onBlur={(e) => {
+                        dispatchListAction({
+                          type: 'addItemInCategory',
+                          categoryId: category.id,
+                          itemName: e.target.value,
+                        });
+                        e.currentTarget.value = '';
+                      }}
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          dispatchListAction({
+                            type: 'addItemInCategory',
+                            categoryId: category.id,
+                            itemName: (e.target as HTMLInputElement).value,
+                          });
+                          e.currentTarget.value = '';
+                        }
+                      }}
+                    />
+                  </div>
+
                   <button
                     className='show-on-card-hover'
                     aria-label='Change Color'
