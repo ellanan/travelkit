@@ -1,7 +1,7 @@
+import { useEffect, useMemo, useReducer, useState } from 'react';
+
 import firebase from 'firebase/app';
 import produce from 'immer';
-
-import { useEffect, useMemo, useReducer, useState } from 'react';
 
 export interface ListItem {
   name: string;
@@ -20,6 +20,7 @@ export interface ListData {
   name?: string;
   categories?: Category[];
 }
+
 const randomId = () => Math.random().toString(36).substr(2, 9);
 
 const ensureListDataShape = (input: Record<string, any>): ListData => {
