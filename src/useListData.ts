@@ -220,7 +220,7 @@ export const useListWithServerData = ({ listId }: { listId: string }) => {
 
   useEffect(() => {
     console.log('server -> local effect triggered');
-    const unsubcribe = listRef.onSnapshot({
+    const unsubscribe = listRef.onSnapshot({
       next: (newDocData) => {
         const serverListData = ensureListDataShape(newDocData.data() ?? {});
         setListDataFromServer(serverListData);
@@ -233,7 +233,7 @@ export const useListWithServerData = ({ listId }: { listId: string }) => {
         console.error(error);
       },
     });
-    return () => unsubcribe();
+    return () => unsubscribe();
   }, [listRef, dispatchListAction]);
 
   useEffect(() => {
