@@ -258,7 +258,11 @@ const List = ({
                                       />
                                       <button
                                         className='show-on-item-hover'
-                                        onClick={() => {}}
+                                        onClick={() => {dispatchListAction({
+                                          type: 'removeItemInCategory',
+                                          categoryId: category.id,
+                                          itemId: item.id,
+                                        })}}
                                       >
                                         <SmallCloseIcon
                                           style={{

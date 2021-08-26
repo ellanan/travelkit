@@ -58,6 +58,11 @@ type ListDataAction =
       itemName: string;
     }
   | {
+      type: 'removeItemInCategory';
+      categoryId: string;
+      itemId: string;
+    }
+  | {
       type: 'setItemInCategoryChecked';
       categoryId: string;
       itemId: string;
@@ -130,6 +135,21 @@ export const useListData = (initialListData: ListData | null = null) => {
               checked: false,
             });
           });
+
+        case 'removeItemInCategory':
+          return {
+            ...currentState,
+            categories: currentState?.categories?.map((category) => {
+              if (category.id !== action.categoryId) return category;
+              return {
+                ...category,
+                items: category.items.filter((item) => {
+                  return action.itemId !== item.id;
+                }),
+              };
+            }),
+          };
+
         case 'setItemInCategoryChecked':
           return produce(currentState, (draftState) => {
             const itemToUpdate = draftState?.categories
