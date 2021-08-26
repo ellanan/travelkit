@@ -24,7 +24,7 @@ const MainHeader = () => {
             {uid ? (
               <NavLink to={`/lists/${uid}`}>My TravelKit</NavLink>
             ) : (
-              <NavLink to='/lists/demo'>Demo</NavLink>
+              <NavLink to='/lists/demo'>My TravelKit</NavLink>
             )}
           </li>
           <li style={{ marginLeft: 'auto' }}>
