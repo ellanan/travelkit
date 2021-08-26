@@ -14,6 +14,7 @@ import {
   DeleteIcon,
   SmallCloseIcon,
   SmallAddIcon,
+  PlusSquareIcon,
 } from '@chakra-ui/icons';
 import { IoColorPalette } from 'react-icons/io5';
 import Masonry from 'react-masonry-css';
@@ -116,7 +117,7 @@ const List = ({
                       defaultValue={category.name}
                       variant='unstyled'
                       css={`
-                        font-size: 0.8em;
+                        font-size: 1em;
                         font-weight: 500;
                         margin-left: 0.5rem;
                         text-transform: capitalize;
@@ -343,17 +344,26 @@ const List = ({
                 onClick={() =>
                   dispatchListAction({
                     type: 'createNewCategory',
-                    categoryName: 'new category',
+                    categoryName: 'category',
                   })
                 }
-                style={{
-                  width: '100%',
-                  minHeight: '80px',
-                  padding: '0',
-                  fontSize: '3em',
-                }}
+                css={`
+                  width: 100%;
+                  min-height: 100px;
+                  padding: 0;
+                  font-size: 1em;
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  justify-content: center;
+                `}
               >
-                +
+                <PlusSquareIcon
+                  css={`
+                    margin-right: 5px;
+                  `}
+                />{' '}
+                new category
               </Card>
             </div>
           </Masonry>
