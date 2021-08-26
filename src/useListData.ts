@@ -3,8 +3,6 @@ import produce from 'immer';
 
 import { useEffect, useMemo, useReducer, useState } from 'react';
 
-const db = firebase.firestore();
-
 export interface ListItem {
   name: string;
   id: string;
@@ -216,7 +214,10 @@ export const useListWithServerData = ({ listId }: { listId: string }) => {
     null
   );
 
-  const listRef = useMemo(() => db.collection('lists').doc(listId), [listId]);
+  const listRef = useMemo(
+    () => firebase.firestore().collection('lists').doc(listId),
+    [listId]
+  );
 
   useEffect(() => {
     console.log('server -> local effect triggered');
