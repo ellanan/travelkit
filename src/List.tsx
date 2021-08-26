@@ -7,7 +7,9 @@ import {
   Draggable,
   DropResult,
 } from 'react-beautiful-dnd';
+import Masonry from 'react-masonry-css';
 
+import { IoColorPalette } from 'react-icons/io5';
 import { Checkbox, Input, HStack, Button } from '@chakra-ui/react';
 import {
   DragHandleIcon,
@@ -16,15 +18,13 @@ import {
   SmallAddIcon,
   PlusSquareIcon,
 } from '@chakra-ui/icons';
-import { IoColorPalette } from 'react-icons/io5';
-import Masonry from 'react-masonry-css';
+
+import { Card } from './Card';
+import { useListData } from './useListData';
+
 // eslint-disable-next-line
 import styled from 'styled-components/macro';
 import type {} from 'styled-components/cssprop';
-
-import { Card } from './Card';
-
-import { useListData } from './useListData';
 
 const List = ({
   listData,
