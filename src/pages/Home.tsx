@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import Typewriter from 'typewriter-effect';
 
 import MainHeader from '../MainHeader';
-import { HomePageLinks } from '../Links';
+import { AttributionHomePage, Links } from '../Footer';
 import { useListData } from '../useListData';
 import List from '../List';
 import { demoListData } from './demoListData';
@@ -113,7 +113,10 @@ const Home = () => {
           } ;
         `}
       />
-      <HomePageLinks />
+      <div style={{ marginTop: 'auto' }}>
+        <Links />
+        <AttributionHomePage />
+      </div>
     </Fragment>
   );
 };

@@ -3,7 +3,7 @@ import React from 'react';
 import MainHeader from '../MainHeader';
 import List from '../List';
 import { TravelBackground } from '../Backgrounds';
-import { ListPageLinks } from '../Links';
+import { AttributionListPage, Links } from '../Footer';
 import { demoListData } from './demoListData';
 import { useListData } from '../useListData';
 
@@ -14,7 +14,10 @@ const Demo = () => {
     <TravelBackground>
       <MainHeader />
       <List listData={listData} dispatchListAction={dispatchListAction} />
-      <ListPageLinks />
+      <div style={{ marginTop: 'auto' }}>
+        <Links />
+        <AttributionListPage />
+      </div>
     </TravelBackground>
   );
 };

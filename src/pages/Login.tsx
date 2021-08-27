@@ -4,7 +4,7 @@ import firebase from 'firebase/app';
 import MainHeader from '../MainHeader';
 import { useSessionContext } from '../useSessionContext';
 import { Redirect } from 'react-router-dom';
-import { LoginPageLinks } from '../Links';
+import { Links } from '../Footer';
 
 const firebaseLoginUIConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -43,7 +43,9 @@ const Login = () => {
         uiConfig={firebaseLoginUIConfig}
         firebaseAuth={firebase.auth()}
       />
-      <LoginPageLinks />
+      <div style={{ marginTop: 'auto', marginBottom: '25px' }}>
+        <Links />
+      </div>
     </div>
   );
 };

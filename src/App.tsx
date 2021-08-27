@@ -4,7 +4,7 @@ import MainHeader from './MainHeader';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Demo from './pages/Demo';
-import { ListPageLinks } from './Links';
+import { AttributionListPage, Links } from './Footer';
 import { TravelBackground } from './Backgrounds';
 import { SessionContextProvider } from './useSessionContext';
 import { ListWithServerData } from './ListWithServerData';
@@ -33,7 +33,10 @@ function App() {
                 key={match.params.listId}
                 id={match.params.listId}
               />
-              <ListPageLinks />
+              <div style={{ marginTop: 'auto' }}>
+                <Links />
+                <AttributionListPage />
+              </div>
             </TravelBackground>
           )}
         />
