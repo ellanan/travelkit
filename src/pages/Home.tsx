@@ -84,7 +84,6 @@ const Home = () => {
           margin-left: auto;
           margin: 20px 70px;
           font-size: 2em;
-          font-weight: bold;
           text-align: center;
           @media (max-width: 800px) {
             margin: 10px 20px;
