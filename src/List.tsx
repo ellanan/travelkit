@@ -103,7 +103,6 @@ const List = ({
           <Masonry
             breakpointCols={breakpointColumnsObj}
             className='my-masonry-grid'
-            columnClassName='my-masonry-grid_column'
             style={{ marginLeft: '20px', marginRight: '20px' }}
           >
             {listData?.categories?.map((category) => (
