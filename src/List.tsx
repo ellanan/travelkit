@@ -152,7 +152,13 @@ const List = ({
                       return (
                         <ol
                           ref={droppableProvided.innerRef}
-                          style={{ listStyleType: 'none', padding: 0 }}
+                          style={{
+                            listStyleType: 'none',
+                            padding: 0,
+                            color: droppableSnapshot.isDraggingOver
+                              ? 'grey'
+                              : 'black',
+                          }}
                           {...droppableProvided.droppableProps}
                         >
                           {category.items.map((item, index) => {
