@@ -117,7 +117,6 @@ export const useListData = (initialListData: ListData | null) => {
               checked: false,
             });
           });
-
         case 'removeItemInCategory':
           return {
             ...currentState,
@@ -131,7 +130,6 @@ export const useListData = (initialListData: ListData | null) => {
               };
             }),
           };
-
         case 'setItemInCategoryChecked':
           return produce(currentState, (draftState) => {
             const itemToUpdate = draftState?.categories
