@@ -43,7 +43,7 @@ const Login = () => {
         uiConfig={firebaseLoginUIConfig}
         firebaseAuth={firebase.auth()}
       />
-      <div style={{ marginTop: 'auto', marginBottom: '2em' }}>
+      <div style={{ marginTop: 'auto', marginBottom: '1.5em' }}>
         <Links />
       </div>
     </div>
