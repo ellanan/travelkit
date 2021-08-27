@@ -29,10 +29,6 @@ type ListDataAction =
       listData: ListData;
     }
   | {
-      type: 'setListName';
-      newName: string;
-    }
-  | {
       type: 'setListCategories';
       categories: Category[];
     }
@@ -85,11 +81,6 @@ export const useListData = (initialListData: ListData | null) => {
       switch (action.type) {
         case 'setListData':
           return action.listData;
-        case 'setListName':
-          return {
-            ...currentState,
-            name: action.newName,
-          };
         case 'setListCategories':
           return {
             ...currentState,
