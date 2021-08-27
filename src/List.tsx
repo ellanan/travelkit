@@ -150,7 +150,7 @@ const List = ({
                   <Droppable droppableId={category.id}>
                     {(droppableProvided, droppableSnapshot) => {
                       return (
-                        <ol
+                        <div
                           ref={droppableProvided.innerRef}
                           style={{
                             listStyleType: 'none',
@@ -286,7 +286,7 @@ const List = ({
                             );
                           })}
                           {droppableProvided.placeholder}
-                        </ol>
+                        </div>
                       );
                     }}
                   </Droppable>
