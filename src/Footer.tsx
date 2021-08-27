@@ -29,7 +29,6 @@ export const AttributionListPage = () => {
     <div
       style={{
         padding: '1em',
-        listStyleType: 'none',
         marginTop: 'auto',
         display: 'flex',
         flexDirection: 'column',
@@ -59,7 +58,6 @@ export const AttributionHomePage = () => {
     <div
       style={{
         padding: '1em',
-        listStyleType: 'none',
         marginTop: 'auto',
         display: 'flex',
         flexDirection: 'column',
