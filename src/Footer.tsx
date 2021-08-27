@@ -9,7 +9,6 @@ export const Links = () => {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        marginBottom: '-5px',
       }}
     >
       <HStack gridGap={4}>
@@ -28,8 +27,8 @@ export const AttributionListPage = () => {
   return (
     <div
       style={{
-        padding: '1em',
-        marginTop: 'auto',
+        paddingBottom: '1em',
+        paddingTop: '0.5em',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -57,8 +56,8 @@ export const AttributionHomePage = () => {
   return (
     <div
       style={{
-        padding: '1em',
-        marginTop: 'auto',
+        paddingBottom: '1em',
+        paddingTop: '0.5em',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

@@ -32,7 +32,7 @@ const Login = () => {
         display: 'flex',
         position: 'relative',
         flexDirection: 'column',
-        height: '100vh',
+        height: '100%',
       }}
     >
       <MainHeader />
