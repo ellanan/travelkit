@@ -23,13 +23,6 @@ export interface ListData {
 
 const randomId = () => Math.random().toString(36).substr(2, 9);
 
-const ensureListDataShape = (input: Record<string, any>): ListData => {
-  return {
-    name: input.name ?? 'New List',
-    categories: input.categories ?? [],
-  };
-};
-
 type ListDataAction =
   | {
       type: 'setListData';
@@ -83,7 +76,7 @@ type ListDataAction =
       categoriesItems: Array<{ categoryId: string; items: ListItem[] }>;
     };
 
-export const useListData = (initialListData: ListData | null = null) => {
+export const useListData = (initialListData: ListData | null) => {
   const [listData, dispatchListAction] = useReducer(
     (
       currentState: ListData | null,
@@ -214,7 +207,7 @@ export const useListData = (initialListData: ListData | null = null) => {
 };
 
 export const useListWithServerData = ({ listId }: { listId: string }) => {
-  const { listData, dispatchListAction } = useListData();
+  const { listData, dispatchListAction } = useListData(null);
   const [listDataFromServer, setListDataFromServer] = useState<ListData | null>(
     null
   );
@@ -225,10 +218,9 @@ export const useListWithServerData = ({ listId }: { listId: string }) => {
   );
 
   useEffect(() => {
-    console.log('server -> local effect triggered');
     const unsubscribe = listRef.onSnapshot({
       next: (newDocData) => {
-        const serverListData = ensureListDataShape(newDocData.data() ?? {});
+        const serverListData = newDocData.data() ?? {};
         setListDataFromServer(serverListData);
         dispatchListAction({
           type: 'setListData',
