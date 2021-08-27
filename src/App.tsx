@@ -26,18 +26,16 @@ function App() {
         <Route
           exact
           path='/lists/:listId'
-          render={({ match }) => {
-            return (
-              <TravelBackground>
-                <MainHeader />
-                <ListWithServerData
-                  key={match.params.listId}
-                  id={match.params.listId}
-                />
-                <ListPageLinks />
-              </TravelBackground>
-            );
-          }}
+          render={({ match }) => (
+            <TravelBackground>
+              <MainHeader />
+              <ListWithServerData
+                key={match.params.listId}
+                id={match.params.listId}
+              />
+              <ListPageLinks />
+            </TravelBackground>
+          )}
         />
       </Switch>
     </SessionContextProvider>
