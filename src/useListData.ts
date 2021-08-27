@@ -17,7 +17,6 @@ interface Category {
 }
 
 export interface ListData {
-  name?: string;
   categories?: Category[];
 }
 

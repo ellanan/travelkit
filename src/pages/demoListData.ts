@@ -1,7 +1,6 @@
 import { ListData } from '../useListData';
 
 export const demoListData: ListData = {
-  name: 'My Wonderful List',
   categories: [
     {
       id: 'catagory-a',
