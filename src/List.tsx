@@ -367,7 +367,7 @@ const List = ({
                   css={`
                     margin-right: 5px;
                   `}
-                />{' '}
+                />
                 new category
               </Card>
             </div>
