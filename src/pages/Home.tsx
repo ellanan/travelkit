@@ -61,7 +61,7 @@ const Home = () => {
           />
         </span>
         <img
-          src={require('../images/travel-checklist.jpg').default}
+          src={require('../images/travel-checklist.png').default}
           alt='travel checklist'
           width='6416'
           height='5000'
@@ -96,7 +96,7 @@ const Home = () => {
       </div>
       <List listData={listData} dispatchListAction={dispatchListAction} />
       <img
-        src={require('../images/travel-people.jpg').default}
+        src={require('../images/travel-people.png').default}
         alt='travel people'
         width='6416'
         height='5000'
