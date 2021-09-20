@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
 import { useSessionContext } from './useSessionContext';
 
+const logoImage = require('./images/logo/logo.png').default;
+
 const MainHeader = () => {
   const { isLoggedIn, logout, uid } = useSessionContext();
   return (
@@ -18,7 +20,14 @@ const MainHeader = () => {
           }}
         >
           <li style={{ padding: '10px' }}>
-            <NavLink to='/'>Home</NavLink>
+            <NavLink to='/' style={{ display: 'flex', flexDirection: 'row' }}>
+              <img
+                src={logoImage}
+                alt='travel kit logo'
+                style={{ width: '25px', height: '25px', marginRight: '10px' }}
+              />
+              <span>Home</span>
+            </NavLink>
           </li>
           <li style={{ padding: '10px' }}>
             {uid ? (
