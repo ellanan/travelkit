@@ -1,3 +1,3 @@
-# travelkit react project
+# travelkit
 
 https://travellist.netlify.app/
