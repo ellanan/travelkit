@@ -9,7 +9,6 @@ import {
 } from 'react-beautiful-dnd';
 import Masonry from 'react-masonry-css';
 
-import { IoColorPalette } from 'react-icons/io5';
 import { Checkbox, Input, HStack, Button } from '@chakra-ui/react';
 import {
   DragHandleIcon,
@@ -332,14 +331,6 @@ const List = ({
                       }}
                     />
                   </div>
-
-                  <button
-                    className='show-on-card-hover'
-                    aria-label='Change Color'
-                    onClick={() => {}}
-                  >
-                    <IoColorPalette />
-                  </button>
                 </Card>
               </div>
             ))}
