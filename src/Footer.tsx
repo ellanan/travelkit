@@ -12,7 +12,11 @@ export const Links = () => {
       }}
     >
       <HStack gridGap={4}>
-        <a href='https://github.com/ellanan' target='_blank' rel='noreferrer'>
+        <a
+          href='https://github.com/ellanan/travelkit'
+          target='_blank'
+          rel='noreferrer'
+        >
           <GoMarkGithub size={18} />
         </a>
         <a href='https://twitter.com/ellanan_' target='_blank' rel='noreferrer'>
