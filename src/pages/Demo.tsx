@@ -1,5 +1,3 @@
-import React from 'react';
-
 import MainHeader from '../MainHeader';
 import List from '../List';
 import { TravelBackground } from '../Backgrounds';

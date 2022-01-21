@@ -1,4 +1,3 @@
-import React from 'react';
 import { GoMarkGithub } from 'react-icons/go';
 import { FaTwitter } from 'react-icons/fa';
 import { HStack } from '@chakra-ui/react';
