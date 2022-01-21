@@ -1,10 +1,10 @@
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/app';
 
-import MainHeader from '../MainHeader';
-import { useSessionContext } from '../useSessionContext';
+import MainHeader from '../components/MainHeader';
+import { useSessionContext } from '../hooks/useSessionContext';
 import { Redirect } from 'react-router-dom';
-import { Links } from '../Footer';
+import { Links } from '../components/Footer';
 
 const firebaseLoginUIConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',

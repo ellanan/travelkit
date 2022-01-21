@@ -1,12 +1,12 @@
 import { Route, Switch } from 'react-router-dom';
 
-import MainHeader from './MainHeader';
+import MainHeader from './components/MainHeader';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Demo from './pages/Demo';
-import { AttributionListPage, Links } from './Footer';
+import { AttributionListPage, Links } from './components/Footer';
 import { TravelBackground } from './Backgrounds';
-import { SessionContextProvider } from './useSessionContext';
+import { SessionContextProvider } from './hooks/useSessionContext';
 import { ListWithServerData } from './ListWithServerData';
 
 function App() {

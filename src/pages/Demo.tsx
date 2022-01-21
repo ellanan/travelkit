@@ -1,9 +1,9 @@
-import MainHeader from '../MainHeader';
-import List from '../List';
+import MainHeader from '../components/MainHeader';
+import List from '../components/List';
 import { TravelBackground } from '../Backgrounds';
-import { AttributionListPage, Links } from '../Footer';
+import { AttributionListPage, Links } from '../components/Footer';
 import { demoListData } from './demoListData';
-import { useListData } from '../useListData';
+import { useListData } from '../hooks/useListData';
 
 const Demo = () => {
   const { listData, dispatchListAction } = useListData(demoListData);

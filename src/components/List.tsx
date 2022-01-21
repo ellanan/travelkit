@@ -1,5 +1,9 @@
+// eslint-disable-next-line
+import styled from 'styled-components/macro';
+import type {} from 'styled-components/cssprop';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
+import Masonry from 'react-masonry-css';
 import produce from 'immer';
 import {
   DragDropContext,
@@ -7,8 +11,6 @@ import {
   Draggable,
   DropResult,
 } from 'react-beautiful-dnd';
-import Masonry from 'react-masonry-css';
-
 import { Checkbox, Input, HStack, Button } from '@chakra-ui/react';
 import {
   DragHandleIcon,
@@ -18,12 +20,25 @@ import {
   PlusSquareIcon,
 } from '@chakra-ui/icons';
 
-import { Card } from './Card';
-import { useListData } from './useListData';
+import { useListData } from '../hooks/useListData';
 
-// eslint-disable-next-line
-import styled from 'styled-components/macro';
-import type {} from 'styled-components/cssprop';
+export const Card = styled.div`
+  padding: 1rem;
+  box-shadow: 0 5px 10px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: #d1c7f3f5;
+  backdrop-filter: blur(1px);
+
+  @media (hover: hover) {
+    .show-on-card-hover {
+      opacity: 0;
+    }
+
+    &:hover .show-on-card-hover {
+      opacity: 1;
+    }
+  }
+`;
 
 const List = ({
   listData,

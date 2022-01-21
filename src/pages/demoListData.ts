@@ -1,4 +1,4 @@
-import { ListData } from '../useListData';
+import { ListData } from '../hooks/useListData';
 
 export const demoListData: ListData = {
   categories: [

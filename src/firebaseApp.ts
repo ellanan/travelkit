@@ -4,7 +4,7 @@ import 'firebase/analytics';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDw8AzvG7oGkeqkGa02pP6gJ5CB10nW-qU',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: 'travel-list-app.firebaseapp.com',
   projectId: 'travel-list-app',
   storageBucket: 'travel-list-app.appspot.com',

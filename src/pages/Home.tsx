@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import Typewriter from 'typewriter-effect';
 
-import MainHeader from '../MainHeader';
-import { AttributionHomePage, Links } from '../Footer';
-import { useListData } from '../useListData';
-import List from '../List';
+import MainHeader from '../components/MainHeader';
+import { AttributionHomePage, Links } from '../components/Footer';
+import { useListData } from '../hooks/useListData';
+import List from '../components/List';
 import { demoListData } from './demoListData';
 
 // eslint-disable-next-line
