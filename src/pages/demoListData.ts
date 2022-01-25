@@ -27,7 +27,7 @@ export const demoListData: ListData = {
           name: 'credit cards',
         },
       ],
-      color: '#53DAC2',
+      color: '#f0d6f7',
     },
     {
       id: 'catagory-b',
@@ -44,7 +44,7 @@ export const demoListData: ListData = {
           name: 'hand sanitizer',
         },
       ],
-      color: '#96DAC8',
+      color: '#96dac8',
     },
     {
       id: 'catagory-c',
@@ -66,7 +66,7 @@ export const demoListData: ListData = {
           name: 'headphones',
         },
       ],
-      color: '#FFEEAD',
+      color: '#ffeead',
     },
     {
       id: 'catagory-d',
@@ -83,7 +83,7 @@ export const demoListData: ListData = {
           name: 'pain relief',
         },
       ],
-      color: '#D6EFF7',
+      color: '#d6eff7',
     },
     {
       id: 'catagory-e',
@@ -110,7 +110,7 @@ export const demoListData: ListData = {
           name: 'underwear',
         },
       ],
-      color: '#D6EFF7',
+      color: '#fbdadaf5',
     },
     {
       id: 'catagory-f',
@@ -132,7 +132,7 @@ export const demoListData: ListData = {
           name: 'toothbrush/toothpaste',
         },
       ],
-      color: '#D6EFF7',
+      color: '#b0ebb2',
     },
   ],
 };
