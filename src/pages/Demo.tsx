@@ -1,6 +1,6 @@
 import MainHeader from '../components/MainHeader';
 import List from '../components/List';
-import { TravelBackground } from '../Backgrounds';
+import { TravelBackground } from '../components/Backgrounds';
 import { AttributionListPage, Links } from '../components/Footer';
 import { demoListData } from './demoListData';
 import { useListData } from '../hooks/useListData';

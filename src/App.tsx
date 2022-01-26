@@ -5,9 +5,9 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Demo from './pages/Demo';
 import { AttributionListPage, Links } from './components/Footer';
-import { TravelBackground } from './Backgrounds';
+import { TravelBackground } from './components/Backgrounds';
 import { SessionContextProvider } from './hooks/useSessionContext';
-import { ListWithServerData } from './ListWithServerData';
+import { ListWithServerData } from './components/ListWithServerData';
 
 function App() {
   return (
