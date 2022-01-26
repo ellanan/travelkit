@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useReducer, useState } from 'react';
 
-import firebase from 'firebase/app';
 import produce from 'immer';
+import firebase from 'firebase/app';
+
+import { useLocalStorage } from './useLocalStorage';
 
 export interface ListItem {
   name: string;
@@ -236,6 +238,7 @@ export const useListWithServerData = ({ listId }: { listId: string }) => {
         console.error(error);
       },
     });
+
     return () => unsubscribe();
   }, [listRef, dispatchListAction]);
 
@@ -249,6 +252,35 @@ export const useListWithServerData = ({ listId }: { listId: string }) => {
     }
     listRef.set(listData, { merge: true });
   }, [listData, listDataFromServer, listRef]);
+
+  return {
+    listData,
+    dispatchListAction,
+  };
+};
+
+export const useListWithLocalStorage = (initialListData: ListData | null) => {
+  const [listDataFromLocalStorage, setListDataInLocalStorage] =
+    useLocalStorage<ListData | null>(
+      `travelkit-list-data`,
+      initialListData || {}
+    );
+
+  const { listData, dispatchListAction } = useListData(
+    listDataFromLocalStorage
+  );
+
+  useEffect(() => {
+    if (!listData) {
+      return;
+    }
+
+    if (listData === listDataFromLocalStorage) {
+      return;
+    }
+
+    setListDataInLocalStorage(listData);
+  }, [listData, listDataFromLocalStorage, setListDataInLocalStorage]);
 
   return {
     listData,

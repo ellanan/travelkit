@@ -3,10 +3,11 @@ import List from '../components/List';
 import { TravelBackground } from '../components/Backgrounds';
 import { AttributionListPage, Links } from '../components/Footer';
 import { demoListData } from './demoListData';
-import { useListData } from '../hooks/useListData';
+import { useListWithLocalStorage } from '../hooks/useListData';
 
 const Demo = () => {
-  const { listData, dispatchListAction } = useListData(demoListData);
+  const { listData, dispatchListAction } =
+    useListWithLocalStorage(demoListData);
 
   return (
     <TravelBackground>
