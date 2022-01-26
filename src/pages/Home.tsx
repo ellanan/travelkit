@@ -107,8 +107,7 @@ const Home = () => {
           @media (max-width: 800px) {
             width: auto;
             height: auto;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 2rem auto;
           } ;
         `}
       />
