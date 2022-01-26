@@ -13,11 +13,6 @@ const firebaseConfig = {
   measurementId: 'G-TDWHN9MLQ8',
 };
 
-console.log(
-  'process.env.REACT_APP_FIREBASE_API_KEY',
-  process.env.REACT_APP_FIREBASE_API_KEY
-);
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
