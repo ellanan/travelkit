@@ -44,7 +44,7 @@ export const demoListData: ListData = {
           name: 'hand sanitizer',
         },
       ],
-      color: '#96dac8',
+      color: '#fdcc69',
     },
     {
       id: 'catagory-c',
