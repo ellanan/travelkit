@@ -1,5 +1,6 @@
 import { GoMarkGithub } from 'react-icons/go';
 import { FaTwitter } from 'react-icons/fa';
+import { GrLinkedin } from 'react-icons/gr';
 import { HStack } from '@chakra-ui/react';
 
 export const Links = () => {
@@ -20,6 +21,13 @@ export const Links = () => {
         </a>
         <a href='https://twitter.com/ellanan_' target='_blank' rel='noreferrer'>
           <FaTwitter size={18} color='#1DA1F2' />
+        </a>
+        <a
+          href='https://www.linkedin.com/in/ella-nan-a8b39027/'
+          target='_blank'
+          rel='noreferrer'
+        >
+          <GrLinkedin size={18} color='#3B67BE' />
         </a>
       </HStack>
     </div>
