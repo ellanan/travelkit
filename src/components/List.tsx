@@ -11,7 +11,18 @@ import {
   Draggable,
   DropResult,
 } from 'react-beautiful-dnd';
-import { Checkbox, Input, HStack, Button } from '@chakra-ui/react';
+import {
+  Checkbox,
+  Input,
+  HStack,
+  Button,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  PopoverArrow,
+  Portal,
+} from '@chakra-ui/react';
 import {
   DragHandleIcon,
   DeleteIcon,
@@ -19,14 +30,25 @@ import {
   SmallAddIcon,
   PlusSquareIcon,
 } from '@chakra-ui/icons';
+import { BiPalette } from 'react-icons/bi';
 
 import { useListData } from '../hooks/useListData';
+
+const colorOptions = [
+  '#f0d6f7',
+  '#fdcc69',
+  '#ffeead',
+  '#d6eff7',
+  '#b0ebb2',
+  '#fbdada',
+  '#d1c7f3',
+];
 
 export const Card = styled.div`
   padding: 1rem;
   box-shadow: 0 5px 10px 1px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  background-color: #d1c7f3f5;
+  background-color: #e7e7e7ef;
   backdrop-filter: blur(1px);
 
   @media (hover: hover) {
@@ -45,6 +67,7 @@ const List = ({
   dispatchListAction,
 }: ReturnType<typeof useListData>) => {
   const [portalDiv, setPortalDiv] = useState<HTMLDivElement | null>(null);
+
   const getCategoryItemsByCategoryId = (categoryId: string) =>
     listData?.categories?.find((category) => category.id === categoryId)
       ?.items ?? [];
@@ -119,10 +142,15 @@ const List = ({
             className='my-masonry-grid'
             style={{ marginLeft: '20px', marginRight: '20px' }}
           >
-            {listData?.categories?.map((category) => (
+            {listData?.categories?.map((category, index) => (
               <div key={category.id} style={{ padding: '1em' }}>
                 <Card
-                  style={{ width: '100%', backgroundColor: category.color }}
+                  style={{
+                    width: '100%',
+                    backgroundColor: category.color
+                      ? category.color
+                      : colorOptions[index % colorOptions.length],
+                  }}
                 >
                   <HStack>
                     <Input
@@ -345,6 +373,43 @@ const List = ({
                         }
                       }}
                     />
+                    <Popover isLazy={true}>
+                      <PopoverTrigger>
+                        <button className='show-on-card-hover'>
+                          <BiPalette size={18} />
+                        </button>
+                      </PopoverTrigger>
+                      <Portal>
+                        <PopoverContent
+                          width='fit-content'
+                          max-width='fit-content'
+                        >
+                          <PopoverArrow />
+                          <PopoverBody paddingBottom={0}>
+                            {colorOptions.map((color) => {
+                              return (
+                                <button
+                                  key={color}
+                                  className='color-sample'
+                                  style={{ backgroundColor: color }}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    if (category.color !== color) {
+                                      dispatchListAction({
+                                        type: 'setCategoryColor',
+                                        categoryId: category.id,
+                                        color: color,
+                                      });
+                                    }
+                                    e.currentTarget.blur();
+                                  }}
+                                />
+                              );
+                            })}
+                          </PopoverBody>
+                        </PopoverContent>
+                      </Portal>
+                    </Popover>
                   </div>
                 </Card>
               </div>

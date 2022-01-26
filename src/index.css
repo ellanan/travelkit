@@ -13,3 +13,13 @@ body,
   display: flex;
   width: auto;
 }
+
+.color-sample {
+  display: inline;
+  height: 26px;
+  width: 26px;
+  background-color: #bbb;
+  border-radius: 50%;
+  margin-left: 0.13rem;
+  margin-right: 0.13rem;
+}

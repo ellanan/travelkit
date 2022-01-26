@@ -67,6 +67,11 @@ type ListDataAction =
       name: string;
     }
   | {
+      type: 'setCategoryColor';
+      categoryId: string;
+      color: string;
+    }
+  | {
       type: 'setCategoriesItems';
       categoriesItems: Array<{ categoryId: string; items: ListItem[] }>;
     };
@@ -165,6 +170,18 @@ export const useListData = (initialListData: ListData | null) => {
             }
 
             categoryToUpdate.name = action.name;
+          });
+        case 'setCategoryColor':
+          return produce(currentState, (draftState) => {
+            const categoryToUpdate = draftState?.categories?.find(
+              ({ id }) => id === action.categoryId
+            );
+
+            if (!categoryToUpdate) {
+              throw new Error(`Could not find item ${action.categoryId}.`);
+            }
+
+            categoryToUpdate.color = action.color;
           });
         case 'setCategoriesItems':
           return produce(currentState, (draftState) => {
