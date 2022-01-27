@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Demo from './pages/Demo';
 import { AttributionListPage, Links } from './components/Footer';
-import { TravelBackground } from './components/Backgrounds';
 import { SessionContextProvider } from './hooks/useSessionContext';
 import { ListWithServerData } from './components/ListWithServerData';
 
@@ -27,7 +26,22 @@ function App() {
           exact
           path='/lists/:listId'
           render={({ match }) => (
-            <TravelBackground>
+            <div>
+              <img
+                src={require('./images/travel-stickers.jpg').default}
+                alt=''
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  filter: 'blur(2px)',
+                  opacity: 0.4,
+                  zIndex: -1,
+                }}
+              />
               <MainHeader />
               <ListWithServerData
                 key={match.params.listId}
@@ -37,7 +51,7 @@ function App() {
                 <Links />
                 <AttributionListPage />
               </div>
-            </TravelBackground>
+            </div>
           )}
         />
       </Switch>
