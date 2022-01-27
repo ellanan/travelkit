@@ -15,6 +15,16 @@ https://travelkit.ellanan.com/
 - Change the card color to any of the available set of colors
 - Responsive UI
 
+## Screenshots
+
+Home Page:
+
+![This is an image](https://github.com/ellanan/travelkit/blob/main/src/images/readme/homePageDemo.png)
+
+Demo Page:
+
+![This is an image](https://github.com/ellanan/travelkit/blob/main/src/images/readme/demoPage.png)
+
 ## Technologies used
 
 Frontend:
@@ -32,13 +42,3 @@ Backend:
 Authentication:
 
 - Firebase Authentication
-
-## Screenshots
-
-Home Page:
-
-![This is an image](https://github.com/ellanan/travelkit/blob/main/src/images/readme/homePage.png)
-
-Demo Page:
-
-![This is an image](https://github.com/ellanan/travelkit/blob/main/src/images/readme/demoPage.png)
