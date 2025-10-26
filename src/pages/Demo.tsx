@@ -11,7 +11,7 @@ const Demo = () => {
   return (
     <>
       <img
-        src={require('../images/travel-stickers.jpg').default}
+        src={require('../images/travel-stickers.jpg')}
         alt=''
         style={{
           position: 'absolute',

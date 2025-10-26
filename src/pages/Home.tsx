@@ -1,15 +1,15 @@
-import React, { Fragment } from 'react';
-import Typewriter from 'typewriter-effect';
+import React, { Fragment } from "react";
+import Typewriter from "typewriter-effect";
 
-import MainHeader from '../components/MainHeader';
-import { AttributionHomePage, Links } from '../components/Footer';
-import { useListData } from '../hooks/useListData';
-import List from '../components/List';
-import { demoListData } from './demoListData';
+import MainHeader from "../components/MainHeader";
+import { AttributionHomePage, Links } from "../components/Footer";
+import { useListData } from "../hooks/useListData";
+import List from "../components/List";
+import { demoListData } from "./demoListData";
 
 // eslint-disable-next-line
-import styled from 'styled-components/macro';
-import type {} from 'styled-components/cssprop';
+import styled from "styled-components/macro";
+import type {} from "styled-components/cssprop";
 
 const Home = () => {
   const { listData, dispatchListAction } = useListData(demoListData);
@@ -51,20 +51,20 @@ const Home = () => {
             }
           `}
         >
-          Have you <br className='hide-for-mobile' /> packed the
+          Have you <br className="hide-for-mobile" /> packed the
           <Typewriter
             options={{
-              strings: ['passport?', 'hand sanitizer?', 'phone charger?'],
+              strings: ["passport?", "hand sanitizer?", "phone charger?"],
               autoStart: true,
               loop: true,
             }}
           />
         </span>
         <img
-          src={require('../images/travel-checklist.png').default}
-          alt='travel checklist'
-          width='6416'
-          height='5000'
+          src={require("../images/travel-checklist.png")}
+          alt="travel checklist"
+          width="6416"
+          height="5000"
           css={`
             width: 50%;
             height: auto;
@@ -75,7 +75,7 @@ const Home = () => {
               height: 300px;
               margin-left: auto;
               margin-right: auto;
-            } ;
+            }
           `}
         />
       </div>
@@ -96,10 +96,10 @@ const Home = () => {
       </div>
       <List listData={listData} dispatchListAction={dispatchListAction} />
       <img
-        src={require('../images/travel-people.png').default}
-        alt='travel people'
-        width='6416'
-        height='5000'
+        src={require("../images/travel-people.png")}
+        alt="travel people"
+        width="6416"
+        height="5000"
         css={`
           height: auto;
           margin-left: auto;
@@ -108,10 +108,10 @@ const Home = () => {
             width: auto;
             height: auto;
             margin: 2rem auto;
-          } ;
+          }
         `}
       />
-      <div style={{ marginTop: 'auto' }}>
+      <div style={{ marginTop: "auto" }}>
         <Links />
         <AttributionHomePage />
       </div>

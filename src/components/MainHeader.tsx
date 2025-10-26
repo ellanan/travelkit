@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
 import { useSessionContext } from '../hooks/useSessionContext';
 
-const logoImage = require('../images/logo/logo.png').default;
+const logoImage = require('../images/logo/logo.png');
 
 const MainHeader = () => {
   const { isLoggedIn, logout, uid } = useSessionContext();

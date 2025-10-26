@@ -1,5 +1,4 @@
-import { GoMarkGithub } from 'react-icons/go';
-import { FaTwitter } from 'react-icons/fa';
+import { FaTwitter, FaGithub } from 'react-icons/fa';
 import { GrLinkedin } from 'react-icons/gr';
 import { HStack } from '@chakra-ui/react';
 
@@ -17,7 +16,7 @@ export const Links = () => {
           target='_blank'
           rel='noreferrer'
         >
-          <GoMarkGithub size={18} />
+          <FaGithub size={18} />
         </a>
         <a href='https://twitter.com/ellanan_' target='_blank' rel='noreferrer'>
           <FaTwitter size={18} color='#1DA1F2' />
